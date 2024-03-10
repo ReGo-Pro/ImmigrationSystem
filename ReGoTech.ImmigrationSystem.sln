@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReGoTech.ImmigrationSystem.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReGoTech.ImmigrationSystem.Tests", "ReGoTech.ImmigrationSystem.Tests\ReGoTech.ImmigrationSystem.Tests.csproj", "{DF1BEC75-354C-4C6B-B121-8C26AFF82C4D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReGoTech.ImmigrationSystem.Constants", "ReGoTech.ImmigrationSystem.Constants\ReGoTech.ImmigrationSystem.Constants.csproj", "{31B0D792-7C4C-4274-AA9E-66414E27EE7C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{DF1BEC75-354C-4C6B-B121-8C26AFF82C4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF1BEC75-354C-4C6B-B121-8C26AFF82C4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF1BEC75-354C-4C6B-B121-8C26AFF82C4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31B0D792-7C4C-4274-AA9E-66414E27EE7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31B0D792-7C4C-4274-AA9E-66414E27EE7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31B0D792-7C4C-4274-AA9E-66414E27EE7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31B0D792-7C4C-4274-AA9E-66414E27EE7C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
