@@ -12,8 +12,10 @@ namespace ReGoTech.ImmigrationSystem.Data
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder) {
 			modelBuilder.ApplyConfiguration(new ClientEntityConfigurations());
+			modelBuilder.ApplyConfiguration(new ClientLoginEntityConfiguration());
 		}
 
 		public DbSet<Client> Clients { get; set; }
+		public DbSet<ClientLogin> ClientLogins { get; set; }
 	}
 }
