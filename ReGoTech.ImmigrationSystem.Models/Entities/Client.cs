@@ -11,5 +11,7 @@ namespace ReGoTech.ImmigrationSystem.Models.Entities
 	{
         public required string Uid { get; set; }
         public ClientType Type { get; set; }
+
+        public virtual ClientLogin? ClientLogin { get; set; }
     }
 }

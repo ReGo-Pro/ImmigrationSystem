@@ -20,5 +20,7 @@ namespace ReGoTech.ImmigrationSystem.Models.Entities
         public DateTime? LockoutDate { get; set; }
         public DateTime? LastLoginDate { get; set; }
 
+        public int ClientId { get; set; }
+        public virtual required Client Client { get; set; }
     }
 }
