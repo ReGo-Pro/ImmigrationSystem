@@ -1,4 +1,4 @@
-namespace ReGoTech.ImmigrationSystem
+namespace ReGoTech.ImmigrationSystem.API
 {
 	public class WeatherForecast
 	{

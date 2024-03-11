@@ -5,15 +5,15 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReGoTech.ImmigrationSystem.Data", "ReGoTech.ImmigrationSystem.Data\ReGoTech.ImmigrationSystem.Data.csproj", "{AC59E19E-4019-42DA-BDAA-9F659866D343}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReGoTech.ImmigrationSystem.API", "ReGoTech.ImmigrationSystem.API\ReGoTech.ImmigrationSystem.API.csproj", "{ED6DD4E3-61B9-423F-BBF4-D1066D2A3750}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReGoTech.ImmigrationSystem.Services", "ReGoTech.ImmigrationSystem.Services\ReGoTech.ImmigrationSystem.Services.csproj", "{727185ED-0E99-4A26-927A-BEE5ED74ABC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReGoTech.ImmigrationSystem.Services", "ReGoTech.ImmigrationSystem.Services\ReGoTech.ImmigrationSystem.Services.csproj", "{727185ED-0E99-4A26-927A-BEE5ED74ABC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReGoTech.ImmigrationSystem.Models", "ReGoTech.ImmigrationSystem.Models\ReGoTech.ImmigrationSystem.Models.csproj", "{202F84E3-9A74-4CB2-90C5-8E9AC925051B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReGoTech.ImmigrationSystem.Models", "ReGoTech.ImmigrationSystem.Models\ReGoTech.ImmigrationSystem.Models.csproj", "{202F84E3-9A74-4CB2-90C5-8E9AC925051B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReGoTech.ImmigrationSystem.Tests", "ReGoTech.ImmigrationSystem.Tests\ReGoTech.ImmigrationSystem.Tests.csproj", "{DF1BEC75-354C-4C6B-B121-8C26AFF82C4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReGoTech.ImmigrationSystem.Tests", "ReGoTech.ImmigrationSystem.Tests\ReGoTech.ImmigrationSystem.Tests.csproj", "{DF1BEC75-354C-4C6B-B121-8C26AFF82C4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReGoTech.ImmigrationSystem.Constants", "ReGoTech.ImmigrationSystem.Constants\ReGoTech.ImmigrationSystem.Constants.csproj", "{31B0D792-7C4C-4274-AA9E-66414E27EE7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReGoTech.ImmigrationSystem.Constants", "ReGoTech.ImmigrationSystem.Constants\ReGoTech.ImmigrationSystem.Constants.csproj", "{31B0D792-7C4C-4274-AA9E-66414E27EE7C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReGoTech.ImmigrationSystem.API", "ReGoTech.ImmigrationSystem.API\ReGoTech.ImmigrationSystem.API.csproj", "{3AB39899-5AF1-4589-84B8-D74AB4F25B21}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +25,6 @@ Global
 		{AC59E19E-4019-42DA-BDAA-9F659866D343}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC59E19E-4019-42DA-BDAA-9F659866D343}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC59E19E-4019-42DA-BDAA-9F659866D343}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ED6DD4E3-61B9-423F-BBF4-D1066D2A3750}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ED6DD4E3-61B9-423F-BBF4-D1066D2A3750}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ED6DD4E3-61B9-423F-BBF4-D1066D2A3750}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ED6DD4E3-61B9-423F-BBF4-D1066D2A3750}.Release|Any CPU.Build.0 = Release|Any CPU
 		{727185ED-0E99-4A26-927A-BEE5ED74ABC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{727185ED-0E99-4A26-927A-BEE5ED74ABC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{727185ED-0E99-4A26-927A-BEE5ED74ABC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +41,10 @@ Global
 		{31B0D792-7C4C-4274-AA9E-66414E27EE7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31B0D792-7C4C-4274-AA9E-66414E27EE7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31B0D792-7C4C-4274-AA9E-66414E27EE7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AB39899-5AF1-4589-84B8-D74AB4F25B21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AB39899-5AF1-4589-84B8-D74AB4F25B21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AB39899-5AF1-4589-84B8-D74AB4F25B21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AB39899-5AF1-4589-84B8-D74AB4F25B21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

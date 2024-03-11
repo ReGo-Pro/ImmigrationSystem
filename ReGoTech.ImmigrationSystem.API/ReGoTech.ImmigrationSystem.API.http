@@ -1,0 +1,6 @@
+@ReGoTech.ImmigrationSystem.API_HostAddress = http://localhost:5041
+
+GET {{ReGoTech.ImmigrationSystem.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

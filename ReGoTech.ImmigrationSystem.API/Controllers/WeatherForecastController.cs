@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace ReGoTech.ImmigrationSystem.Controllers
+namespace ReGoTech.ImmigrationSystem.API.Controllers
 {
 	[ApiController]
 	[Route("[controller]")]
