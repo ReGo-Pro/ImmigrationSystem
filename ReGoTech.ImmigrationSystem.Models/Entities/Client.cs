@@ -9,7 +9,7 @@ namespace ReGoTech.ImmigrationSystem.Models.Entities
 {
 	public class Client : Person
 	{
-        public string Uid { get; set; }
+        public required string Uid { get; set; }
         public ClientType Type { get; set; }
     }
 }
