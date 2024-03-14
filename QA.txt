@@ -1,0 +1,11 @@
+======================================================================================================================================================================
+Q.	When submitting a DTO to SignUp endpoint, is it safe to send password in plain text over HTTPS? If not, what other options are available?
+A.	From Microsoft Copilot
+	It is standard practice to send passwords over HTTPS in plain text. 
+	Ensure that you send the password via a POST request, not a GET request. GET requests could expose the password in browser history logs or web server access logs.
+	Some login forms use JavaScript to hash the password before sending it. However, this approach doesn’t significantly enhance security.
+	Other considerations:
+		-	Consider setting an authenticated cookie after successful authentication.
+		-	Another option is using HTTP Digest Authorization over HTTPS.
+		-	HTTP Basic Auth: While not ideal, HTTP Basic Auth over HTTPS is still more secure than sending credentials in the URL
+======================================================================================================================================================================

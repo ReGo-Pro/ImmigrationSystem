@@ -13,7 +13,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReGoTech.ImmigrationSystem.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReGoTech.ImmigrationSystem.Constants", "ReGoTech.ImmigrationSystem.Constants\ReGoTech.ImmigrationSystem.Constants.csproj", "{31B0D792-7C4C-4274-AA9E-66414E27EE7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReGoTech.ImmigrationSystem.API", "ReGoTech.ImmigrationSystem.API\ReGoTech.ImmigrationSystem.API.csproj", "{3AB39899-5AF1-4589-84B8-D74AB4F25B21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReGoTech.ImmigrationSystem.API", "ReGoTech.ImmigrationSystem.API\ReGoTech.ImmigrationSystem.API.csproj", "{3AB39899-5AF1-4589-84B8-D74AB4F25B21}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8AB9F8E2-E83D-470B-B357-A8DC521C5BF4}"
+	ProjectSection(SolutionItems) = preProject
+		QA.txt = QA.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
