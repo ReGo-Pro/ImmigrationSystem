@@ -9,3 +9,13 @@ A.	From Microsoft Copilot
 		-	Another option is using HTTP Digest Authorization over HTTPS.
 		-	HTTP Basic Auth: While not ideal, HTTP Basic Auth over HTTPS is still more secure than sending credentials in the URL
 ======================================================================================================================================================================
+Q.	How to deal with model validation (DTO) in ASP.NET Core MVC?
+A.	From Microsoft Copilot and my own testgs
+	A good way is to use DataAnnotation attributes for simple validations. For complex validation, one of the following options can be used:
+		-	Custom Validation Attributes
+		-	FluentValidation: FluentValidation is a powerful library that provides expressive validation rules
+		-	Service Layer Validation: Implement custom validation logic in your service layer.
+		-	Middleware for Validation: Create a custom middleware that intercepts requests before reaching the controller.
+		-	Domain-Driven Design (DDD) Validators: If you follow DDD principles, consider placing validation logic within your domain entities or value objects
+	* The first thing I'll test in this project is "Service Layer Validation"
+======================================================================================================================================================================
