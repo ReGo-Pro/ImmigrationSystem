@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ReGoTech.ImmigrationSystem.Models\ReGoTech.ImmigrationSystem.Models.csproj" />
+  </ItemGroup>
+
 </Project>
