@@ -11,11 +11,11 @@ namespace ReGoTech.ImmigrationSystem.Models.DataTransferObjects.Inbound
 	public class ClientDtoIn : InboundDtoBase
 	{
         [Required]
-        [StringLength(255)]
+        [StringLength(128)]
         public required string FirstName { get; set; }
 
         [Required]
-        [StringLength(255)]
+        [StringLength(128)]
         public required string LastName { get; set; }
 
         [Required]
@@ -23,18 +23,20 @@ namespace ReGoTech.ImmigrationSystem.Models.DataTransferObjects.Inbound
         public ClientType Type { get; set; }
 
         [Required]
-        [StringLength(255)]
-        public string Username { get; set; }
+        [StringLength(32)]
+        public required string Username { get; set; }
 
         [Required]
-        [StringLength(255)]
-        public string Password { get; set; }
+        [StringLength(32)]
+        public required string Password { get; set; }
 
         [Required]
-        [StringLength (255)]
-        public string PasswordRepeat { get; set; }
+        [StringLength (32)]
+        public required string PasswordRepeat { get; set; }
 
         [Required]
-        public string Email { get; set; }
+        [EmailAddress]
+        [StringLength(128)]
+        public required string Email { get; set; }
     }
 }
