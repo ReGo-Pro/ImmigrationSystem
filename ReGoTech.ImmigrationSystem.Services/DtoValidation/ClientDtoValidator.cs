@@ -1,4 +1,5 @@
-﻿using ReGoTech.ImmigrationSystem.Models.DataTransferObjects;
+﻿using ReGoTech.ImmigrationSystem.Data;
+using ReGoTech.ImmigrationSystem.Models.DataTransferObjects;
 using ReGoTech.ImmigrationSystem.Models.DataTransferObjects.Inbound;
 using System;
 using System.Collections.Generic;
@@ -11,13 +12,22 @@ namespace ReGoTech.ImmigrationSystem.Services.DtoValidation
 {
 	public class ClientDtoValidator : DtoValidatorBase<ClientDtoIn>
 	{
+		private IAccountUnitOfWork _accountUnitOfWork;
+		public ClientDtoValidator(IAccountUnitOfWork accountUnitOfWork) {
+			_accountUnitOfWork = accountUnitOfWork;
+		}
+
 		protected override void DoValidate(ClientDtoIn model) {
 			// There are some basic validations on ClientDtoIn level (as attributes) so we skip duplicate validations here. 
 			if (model.Password != model.PasswordRepeat) {
 				AddError(nameof(model.PasswordRepeat), "Passwords do not match"); // TODO: support multilingual 
 			}
 
-			// TODO: Check if username exists -> This requires database access which should come from repository after it's developed
+			var existingClient = _accountUnitOfWork.ClientLoginRepository
+				.FirstOrDefaultAsync(x => x.Username.ToLower() == model.Username.ToLower());
+			if (existingClient != null) {
+				AddError(nameof(model.Username), "Username already exists. Please choose another one.");
+			}
 			
 			// Regex check can aslo prevent sql injection attacks
 			if (!Regex.IsMatch(model.FirstName, @"^[a-zA-Z]+$")) {
