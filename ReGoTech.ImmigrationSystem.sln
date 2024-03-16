@@ -3,15 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReGoTech.ImmigrationSystem.Data", "ReGoTech.ImmigrationSystem.Data\ReGoTech.ImmigrationSystem.Data.csproj", "{AC59E19E-4019-42DA-BDAA-9F659866D343}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReGoTech.ImmigrationSystem.Services", "ReGoTech.ImmigrationSystem.Services\ReGoTech.ImmigrationSystem.Services.csproj", "{727185ED-0E99-4A26-927A-BEE5ED74ABC2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReGoTech.ImmigrationSystem.Models", "ReGoTech.ImmigrationSystem.Models\ReGoTech.ImmigrationSystem.Models.csproj", "{202F84E3-9A74-4CB2-90C5-8E9AC925051B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReGoTech.ImmigrationSystem.Tests", "ReGoTech.ImmigrationSystem.Tests\ReGoTech.ImmigrationSystem.Tests.csproj", "{DF1BEC75-354C-4C6B-B121-8C26AFF82C4D}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReGoTech.ImmigrationSystem.Constants", "ReGoTech.ImmigrationSystem.Constants\ReGoTech.ImmigrationSystem.Constants.csproj", "{31B0D792-7C4C-4274-AA9E-66414E27EE7C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReGoTech.ImmigrationSystem.API", "ReGoTech.ImmigrationSystem.API\ReGoTech.ImmigrationSystem.API.csproj", "{3AB39899-5AF1-4589-84B8-D74AB4F25B21}"
 EndProject
@@ -20,16 +16,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		QA.txt = QA.txt
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReGoTech.ImmigrationSystem.Common", "ReGoTech.ImmigrationSystem.Common\ReGoTech.ImmigrationSystem.Common.csproj", "{E25CF891-D7ED-4713-B84A-7FEA63279208}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReGoTech.ImmigrationSystem.Data.EntityFramework", "ReGoTech.ImmigrationSystem.Data.EntityFramework\ReGoTech.ImmigrationSystem.Data.EntityFramework.csproj", "{3646FB6A-3834-4C2C-87EB-7DA89947DF6E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AC59E19E-4019-42DA-BDAA-9F659866D343}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AC59E19E-4019-42DA-BDAA-9F659866D343}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AC59E19E-4019-42DA-BDAA-9F659866D343}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AC59E19E-4019-42DA-BDAA-9F659866D343}.Release|Any CPU.Build.0 = Release|Any CPU
 		{727185ED-0E99-4A26-927A-BEE5ED74ABC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{727185ED-0E99-4A26-927A-BEE5ED74ABC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{727185ED-0E99-4A26-927A-BEE5ED74ABC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -42,14 +38,18 @@ Global
 		{DF1BEC75-354C-4C6B-B121-8C26AFF82C4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF1BEC75-354C-4C6B-B121-8C26AFF82C4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF1BEC75-354C-4C6B-B121-8C26AFF82C4D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{31B0D792-7C4C-4274-AA9E-66414E27EE7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{31B0D792-7C4C-4274-AA9E-66414E27EE7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{31B0D792-7C4C-4274-AA9E-66414E27EE7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{31B0D792-7C4C-4274-AA9E-66414E27EE7C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3AB39899-5AF1-4589-84B8-D74AB4F25B21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3AB39899-5AF1-4589-84B8-D74AB4F25B21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3AB39899-5AF1-4589-84B8-D74AB4F25B21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3AB39899-5AF1-4589-84B8-D74AB4F25B21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E25CF891-D7ED-4713-B84A-7FEA63279208}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E25CF891-D7ED-4713-B84A-7FEA63279208}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E25CF891-D7ED-4713-B84A-7FEA63279208}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E25CF891-D7ED-4713-B84A-7FEA63279208}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3646FB6A-3834-4C2C-87EB-7DA89947DF6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3646FB6A-3834-4C2C-87EB-7DA89947DF6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3646FB6A-3834-4C2C-87EB-7DA89947DF6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3646FB6A-3834-4C2C-87EB-7DA89947DF6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ReGoTech.ImmigrationSystem.Constants\ReGoTech.ImmigrationSystem.Constants.csproj" />
+    <ProjectReference Include="..\ReGoTech.ImmigrationSystem.Common\ReGoTech.ImmigrationSystem.Common.csproj" />
   </ItemGroup>
 
 </Project>

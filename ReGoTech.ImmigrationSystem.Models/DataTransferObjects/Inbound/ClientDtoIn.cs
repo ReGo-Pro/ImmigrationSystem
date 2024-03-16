@@ -1,4 +1,4 @@
-﻿using ReGoTech.ImmigrationSystem.Constants;
+﻿using ReGoTech.ImmigrationSystem.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
