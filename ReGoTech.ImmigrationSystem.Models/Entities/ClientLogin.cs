@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace ReGoTech.ImmigrationSystem.Models.Entities
 {
-	public class ClientLogin
+	public class ClientLogin : EntityBase
 	{
         public static int LockoutTryCount = 5;
 
-        public int Id { get; set; }
         public required string Username { get; set; }
         public required string Email { get; set; }
         public required string PasswordHash { get; set; }

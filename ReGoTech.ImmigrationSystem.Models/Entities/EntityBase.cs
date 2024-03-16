@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace ReGoTech.ImmigrationSystem.Models.Entities
 {
-	public abstract class Person : EntityBase
+	public abstract class EntityBase
 	{
-        public required string FirstName { get; set; }
-        public required string LastName { get; set; }
+        public int Id { get; set; }
     }
 }
