@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ReGoTech.ImmigrationSystem.Services.ModelValidation
+namespace ReGoTech.ImmigrationSystem.Services.DtoValidation
 {
 	public interface IDtoValidator<T>
 	{
-		List<DtoValidationError> Validate(T model);
+		void Validate(T model);
+		IReadOnlyList<DtoValidationError> ValidationErrors { get; }
+		bool HasError { get; }
 	}
 }

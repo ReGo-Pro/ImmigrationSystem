@@ -1,5 +1,4 @@
 ﻿using ReGoTech.ImmigrationSystem.Models.DataTransferObjects;
-using ReGoTech.ImmigrationSystem.Services.ModelValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +19,8 @@ namespace ReGoTech.ImmigrationSystem.Services.DtoValidation
 
 		public IReadOnlyList<DtoValidationError> ValidationErrors => ErrorList.AsReadOnly();
 
-		public List<DtoValidationError> Validate(T model) {
-			throw new NotImplementedException();
+		public void Validate(T model) {
+			DoValidate(model);
 		}
 
 		protected void AddError(string propertyName, string errorMessage) {
