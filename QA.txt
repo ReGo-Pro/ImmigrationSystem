@@ -10,7 +10,7 @@ A.	From Microsoft Copilot
 		-	HTTP Basic Auth: While not ideal, HTTP Basic Auth over HTTPS is still more secure than sending credentials in the URL
 ======================================================================================================================================================================
 Q.	How to deal with model validation (DTO) in ASP.NET Core MVC?
-A.	From Microsoft Copilot and my own testgs
+A.	From Microsoft Copilot and my own tests
 	A good way is to use DataAnnotation attributes for simple validations. For complex validation, one of the following options can be used:
 		-	Custom Validation Attributes
 		-	FluentValidation: FluentValidation is a powerful library that provides expressive validation rules
@@ -18,4 +18,25 @@ A.	From Microsoft Copilot and my own testgs
 		-	Middleware for Validation: Create a custom middleware that intercepts requests before reaching the controller.
 		-	Domain-Driven Design (DDD) Validators: If you follow DDD principles, consider placing validation logic within your domain entities or value objects
 	* The first thing I'll test in this project is "Service Layer Validation"
+======================================================================================================================================================================
+Q.	I want to use a unit of work for each controller in my ASP.NET API application. Is this a good approach?
+A.	From Microsoft Copilot and my own tests and research
+	Certainly! Using a unit of work pattern for each controller in your ASP.NET Core API application is a good approach. Here's why:
+		-	By employing a unit of work per controller, you achieve better modularity and separation of concerns
+		-	Creating a unit of work per controller ensures that the database context is scoped appropriately
+		-	With a unit of work per controller, you can easily manage transactions
+		-	The unit of work coordinates the repositories, ensuring consistent behavior across related actions
+		-	When writing unit tests, you can easily mock the unit of work and repositories separately
+		-	Customization: By having a unit of work per controller, you can customize it based on the controller’s needs (e.g., adding specific repository methods)
+======================================================================================================================================================================
+Q.	Comparing having SaveChanges in repo vs single unit of work vs unit of work per controller. 
+A.	From my own research and testing and thinking
+	When you use SaveChanges in a single repo, handling transactions is a challange, take Client and ClientLogin in SignUp endpoint in this API for example. If I save
+	changes in Client repo and then in ClientLogin repo, I have to find a way to revert Client creation if ClientLogin fails. But when we use a unit of work, handling
+	transaction is very easy. You just make all your changes on DbContext and add SaveChanges once which is transactional it an on itself. Also less roundtrip to
+	database. 
+	Using a single unit of work is not very efficient because for each request you end up instanciating many repositories that are not required to handle that request.
+	But when you use a unit of work for each controller, you have a much better control over transactions and you only instanciate repositories that are used in that
+	controller which is much more efficient. If a controller does not deal with multiple entities at the same time, you do not need a unit of work and you can just add
+	SaveChanges to the repository itself. But it might be a good idea to be consistent.
 ======================================================================================================================================================================
