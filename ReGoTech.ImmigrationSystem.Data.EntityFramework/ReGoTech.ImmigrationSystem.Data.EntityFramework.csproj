@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ReGoTech.ImmigrationSystem.Data\ReGoTech.ImmigrationSystem.Data.csproj" />
     <ProjectReference Include="..\ReGoTech.ImmigrationSystem.Models\ReGoTech.ImmigrationSystem.Models.csproj" />
   </ItemGroup>
 
