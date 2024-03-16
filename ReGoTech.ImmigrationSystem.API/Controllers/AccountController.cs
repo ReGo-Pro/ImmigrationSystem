@@ -48,8 +48,6 @@ namespace ReGoTech.ImmigrationSystem.API.Controllers
 			return Created("", _signupModelConverter.ConvertToDto(model));
 		}
 
-
-		// Add client (anonymous sign up)
 		// Login (anonymous)
 
 		// Remove client (should be authenticated - just for same client - and admin)
