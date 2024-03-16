@@ -17,6 +17,7 @@ namespace ReGoTech.ImmigrationSystem.Services.ModelConvertion.Converters
 			var client = new Client() {
 				FirstName = dto.FirstName,
 				LastName = dto.LastName,
+				Type = dto.Type,
 				Uid = "UniqueId"
 			};
 
@@ -39,7 +40,8 @@ namespace ReGoTech.ImmigrationSystem.Services.ModelConvertion.Converters
 			return new ClientDtoOut() {
 				FirstName = model.Client.FirstName,
 				LastName = model.Client.LastName,
-				Type = Enum.GetName(model.Client.Type),     // TODO: Find a better way for this (considering bilingual features)
+				// TODO: Find a better way for this (considering bilingual features):
+				Type = Enum.GetName(model.Client.Type),     
 				UniqueIdentifier = model.Client.Uid,
 				Email = model.ClientLogin.Email
 			};
