@@ -4,6 +4,7 @@ using ReGoTech.ImmigrationSystem.Models.DataTransferObjects.Inbound;
 using ReGoTech.ImmigrationSystem.Models.Entities;
 using ReGoTech.ImmigrationSystem.Services.DtoValidation;
 using ReGoTech.ImmigrationSystem.Data;
+using ReGoTech.ImmigrationSystem.Services.ModelConvertion.Contracts;
 
 namespace ReGoTech.ImmigrationSystem.API.Controllers
 {
@@ -11,11 +12,14 @@ namespace ReGoTech.ImmigrationSystem.API.Controllers
 	{
 		private IDtoValidator<ClientDtoIn> _clientDtoValidator;
 		private IAccountUnitOfWork _accountUnitOfWork;
+		private ISignupModelConverter _signupModelConverter;
 
 		public AccountController(IAccountUnitOfWork accountUnitOfWork,
+								 ISignupModelConverter signupModelConverter,
 								 IDtoValidator<ClientDtoIn> clientDtoValidator) {
 			_clientDtoValidator = clientDtoValidator;
 			_accountUnitOfWork = accountUnitOfWork;
+			_signupModelConverter = signupModelConverter;
 		}
 
 		[HttpGet]
@@ -27,7 +31,6 @@ namespace ReGoTech.ImmigrationSystem.API.Controllers
 		[AllowAnonymous]
 		public async Task<IActionResult> SignUp(ClientDtoIn dto) {
 			if (!ModelState.IsValid) {
-				// Should we return ModelState from here? 
 				return BadRequest(ModelState);
 			}
 
@@ -36,28 +39,13 @@ namespace ReGoTech.ImmigrationSystem.API.Controllers
 				return BadRequest(_clientDtoValidator.ValidationErrors);
 			}
 
-			// TODO: Create client in database
-			var client = new Client() {
-				FirstName = dto.FirstName,
-				LastName = dto.LastName,
-				Type = dto.Type,
-				Uid = "UniqueID"
-			};
-
-			var clientLogin = new ClientLogin() {
-				Client = client,
-				Username = dto.Username,
-				Email = dto.Email,
-				PasswordHash = dto.Password,    // TODO: hash the password
-				PasswordSalt = "PasswordSault"  // We get this from the hash function
-			};
-
-			// This part's actually not bad
-			_accountUnitOfWork.ClientRepository.Add(client);
-			_accountUnitOfWork.ClientLoginRepository.Add(clientLogin);
+			var model = _signupModelConverter.ConvertFromDto(dto);
+			_accountUnitOfWork.ClientRepository.Add(model.Client);
+			_accountUnitOfWork.ClientLoginRepository.Add(model.ClientLogin);
 			await _accountUnitOfWork.CompleteAsync();
 
-			return Ok();
+			// TODO: Figure out what shoule be returned as URI here
+			return Created("", _signupModelConverter.ConvertToDto(model));
 		}
 
 

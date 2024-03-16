@@ -3,6 +3,8 @@ using ReGoTech.ImmigrationSystem.Data.EntityFramework.WorkUnits;
 using ReGoTech.ImmigrationSystem.Models.DataTransferObjects.Inbound;
 using ReGoTech.ImmigrationSystem.Services.DtoValidation;
 using ReGoTech.ImmigrationSystem.Data.EntityFramework;
+using ReGoTech.ImmigrationSystem.Services.ModelConvertion.Contracts;
+using ReGoTech.ImmigrationSystem.Services.ModelConvertion.Converters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +23,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddEFWithSqlServer(connectionString);
 builder.Services.AddScoped<IDtoValidator<ClientDtoIn>, ClientDtoValidator>();
 builder.Services.AddScoped<IAccountUnitOfWork, AccountUnitOfWork>();
+builder.Services.AddScoped<ISignupModelConverter, SignUpModelConverter>();
 
 var app = builder.Build();
 
