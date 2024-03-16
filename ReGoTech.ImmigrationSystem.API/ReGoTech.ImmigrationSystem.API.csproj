@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ReGoTech.ImmigrationSystem.Models\ReGoTech.ImmigrationSystem.Models.csproj" />
+    <ProjectReference Include="..\ReGoTech.ImmigrationSystem.Services\ReGoTech.ImmigrationSystem.Services.csproj" />
   </ItemGroup>
 
 </Project>
