@@ -40,3 +40,10 @@ A.	From my own research and testing and thinking
 	controller which is much more efficient. If a controller does not deal with multiple entities at the same time, you do not need a unit of work and you can just add
 	SaveChanges to the repository itself. But it might be a good idea to be consistent.
 ======================================================================================================================================================================
+Q.	What is the default transactional behavior of DbContext in EF Core?
+A.	By default, when you call SaveChanges (or SaveChangesAsync) on the DbContext, it wraps all changes (from all DbSet instances) in a single transaction. If any part 
+	of the transaction fails (e.g., an exception is thrown), all changes are rolled back. This ensures that the database remains in a consistent state.
+	You can also use explicit tranactions using Database.BeginTransaction method. In this case, you create a transaction explicitly, and you have more control over how 
+	changes are committed or rolled back. If you handle multiple DbSet instances within the same transaction, a failure in one set won’t affect the others until you 
+	explicitly commit or roll back the transaction.
+======================================================================================================================================================================
