@@ -17,29 +17,29 @@ namespace ReGoTech.ImmigrationSystem.Services.DtoValidation
 			_accountUnitOfWork = accountUnitOfWork;
 		}
 
-		protected override void DoValidate(ClientDtoIn model) {
+		protected override void DoValidate(ClientDtoIn dto) {
 			// There are some basic validations on ClientDtoIn level (as attributes) so we skip duplicate validations here. 
-			if (model.Password != model.PasswordRepeat) {
-				AddError(nameof(model.PasswordRepeat), "Passwords do not match"); // TODO: support multilingual 
+			if (dto.Password != dto.PasswordRepeat) {
+				AddError(nameof(dto.PasswordRepeat), "Passwords do not match"); // TODO: support multilingual 
 			}
 
 			var existingClient = _accountUnitOfWork.ClientLoginRepository
-				.FirstOrDefaultAsync(x => x.Username.ToLower() == model.Username.ToLower());
+				.FirstOrDefaultAsync(x => x.Username.ToLower() == dto.Username.ToLower());
 			if (existingClient != null) {
-				AddError(nameof(model.Username), "Username already exists. Please choose another one.");
+				AddError(nameof(dto.Username), "Username already exists. Please choose another one.");
 			}
 			
 			// Regex check can aslo prevent sql injection attacks
-			if (!Regex.IsMatch(model.FirstName, @"^[a-zA-Z]+$")) {
-				AddError(nameof(model.FirstName), "First name should only contain alphabetic characters."); // TODO: support multilingual 
+			if (!Regex.IsMatch(dto.FirstName, @"^[a-zA-Z]+$")) {
+				AddError(nameof(dto.FirstName), "First name should only contain alphabetic characters."); // TODO: support multilingual 
 			}
 
-			if (!Regex.IsMatch(model.LastName, @"^[a-zA-Z]+$")) {
-				AddError(nameof(model.LastName), "Last name should only contain alphabetic characters."); // TODO: support multilingual 
+			if (!Regex.IsMatch(dto.LastName, @"^[a-zA-Z]+$")) {
+				AddError(nameof(dto.LastName), "Last name should only contain alphabetic characters."); // TODO: support multilingual 
 			}
 
-			if (!Regex.IsMatch(model.Username, @"^[a-zA-Z0-9_]+$")) {
-				AddError(nameof(model.Username), "Username can only contain alphanumeric and _ characters");
+			if (!Regex.IsMatch(dto.Username, @"^[a-zA-Z0-9_]+$")) {
+				AddError(nameof(dto.Username), "Username can only contain alphanumeric and _ characters");
 			}
 
 			// TODO: Password strength validation (length, complexity, etc.)
