@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ReGoTech.ImmigrationSystem.Data
 {
-	public interface IRepository<TEntity, TKey> where TEntity : class where TKey : IEquatable<TKey>
+	public interface IRepository<TEntity> where TEntity : class
 	{
-		Task<TEntity> GetByIdAsync(TKey id);
+		Task<TEntity> GetByIdAsync(int id);
 		Task<List<TEntity>> GetAllAsync(Func<TEntity, bool> predicate);
 		Task<List<TEntity>> GetAllAsync();
 

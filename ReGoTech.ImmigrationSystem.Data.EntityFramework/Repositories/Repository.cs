@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ReGoTech.ImmigrationSystem.Data.EntityFramework.Repositories
 {
-	public class Repository<TEntity> : IRepository<TEntity, int> where TEntity : EntityBase
+	public class Repository<TEntity> : IRepository<TEntity> where TEntity : EntityBase
 	{
 		private DbContext _dbContext;
 
