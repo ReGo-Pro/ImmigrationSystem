@@ -26,6 +26,10 @@ namespace ReGoTech.ImmigrationSystem.Data.EntityFramework.Repositories
 			return await _dbContext.FindAsync<List<TEntity>>(predicate);
 		}
 
+		public async Task<TEntity> FirstOrDefaultAsync(Func<TEntity, bool> predicate) {
+			return await _dbContext.Set<TEntity>().FirstOrDefaultAsync();
+		}
+
 		public void Add(TEntity entity) {
 			_dbContext.Add(entity);
 		}
