@@ -1,3 +1,5 @@
+using ReGoTech.ImmigrationSystem.Data;
+using ReGoTech.ImmigrationSystem.Data.EntityFramework.WorkUnits;
 using ReGoTech.ImmigrationSystem.Models.DataTransferObjects.Inbound;
 using ReGoTech.ImmigrationSystem.Services.DtoValidation;
 using ReGoTech.ImmigrationSystem.Data.EntityFramework;
@@ -15,8 +17,10 @@ string connectionString = "Server=REGO\\SQLEXPRESS;Database=ImmigrationMaster;Us
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// We must add entity framework
 builder.Services.AddEFWithSqlServer(connectionString);
 builder.Services.AddScoped<IDtoValidator<ClientDtoIn>, ClientDtoValidator>();
+builder.Services.AddScoped<IAccountUnitOfWork, AccountUnitOfWork>();
 
 var app = builder.Build();
 

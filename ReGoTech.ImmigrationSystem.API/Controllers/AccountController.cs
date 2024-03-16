@@ -3,14 +3,19 @@ using Microsoft.AspNetCore.Mvc;
 using ReGoTech.ImmigrationSystem.Models.DataTransferObjects.Inbound;
 using ReGoTech.ImmigrationSystem.Models.Entities;
 using ReGoTech.ImmigrationSystem.Services.DtoValidation;
+using ReGoTech.ImmigrationSystem.Data;
 
 namespace ReGoTech.ImmigrationSystem.API.Controllers
 {
 	public class AccountController : ApiController
 	{
 		private IDtoValidator<ClientDtoIn> _clientDtoValidator;
-		public AccountController(IDtoValidator<ClientDtoIn> clientDtoValidator) {
+		private IAccountUnitOfWork _accountUnitOfWork;
+
+		public AccountController(IAccountUnitOfWork accountUnitOfWork,
+								 IDtoValidator<ClientDtoIn> clientDtoValidator) {
 			_clientDtoValidator = clientDtoValidator;
+			_accountUnitOfWork = accountUnitOfWork;
 		}
 
 		[HttpGet]
@@ -32,6 +37,26 @@ namespace ReGoTech.ImmigrationSystem.API.Controllers
 			}
 
 			// TODO: Create client in database
+			var client = new Client() {
+				FirstName = dto.FirstName,
+				LastName = dto.LastName,
+				Type = dto.Type,
+				Uid = "UniqueID"
+			};
+
+			var clientLogin = new ClientLogin() {
+				Client = client,
+				Username = dto.Username,
+				Email = dto.Email,
+				PasswordHash = dto.Password,    // TODO: hash the password
+				PasswordSalt = "PasswordSault"  // We get this from the hash function
+			};
+
+			// This part's actually not bad
+			_accountUnitOfWork.ClientRepository.Add(client);
+			_accountUnitOfWork.ClientLoginRepository.Add(clientLogin);
+			await _accountUnitOfWork.CompleteAsync();
+
 			return Ok();
 		}
 
