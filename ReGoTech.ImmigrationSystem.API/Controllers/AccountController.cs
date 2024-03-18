@@ -11,14 +11,14 @@ namespace ReGoTech.ImmigrationSystem.API.Controllers
 	public class AccountController : ApiController
 	{
 		private IDtoValidator<ClientDtoIn> _clientDtoValidator;
-		private IUnitOfWork _accountUnitOfWork;
+		private IUnitOfWork _uow;
 		private ISignupModelConverter _signupModelConverter;
 
 		public AccountController(IUnitOfWork accountUnitOfWork,
 								 ISignupModelConverter signupModelConverter,
 								 IDtoValidator<ClientDtoIn> clientDtoValidator) {
 			_clientDtoValidator = clientDtoValidator;
-			_accountUnitOfWork = accountUnitOfWork;
+			_uow = accountUnitOfWork;
 			_signupModelConverter = signupModelConverter;
 		}
 
@@ -40,9 +40,9 @@ namespace ReGoTech.ImmigrationSystem.API.Controllers
 			}
 
 			var model = _signupModelConverter.ConvertFromDto(dto);
-			_accountUnitOfWork.ClientRepository.Add(model.Client);
-			_accountUnitOfWork.ClientLoginRepository.Add(model.ClientLogin);
-			await _accountUnitOfWork.CompleteAsync();
+			_uow.ClientRepository.Add(model.Client);
+			_uow.ClientLoginRepository.Add(model.ClientLogin);
+			await _uow.CompleteAsync();
 
 			// TODO: Figure out what shoule be returned as URI here
 			return Created("", _signupModelConverter.ConvertToDto(model));
