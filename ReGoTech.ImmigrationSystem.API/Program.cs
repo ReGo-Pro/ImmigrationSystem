@@ -21,9 +21,9 @@ builder.Services.AddSwaggerGen();
 
 // We must add entity framework
 builder.Services.AddEFWithSqlServer(connectionString);
-builder.Services.AddTransient<IDtoValidator<ClientDtoIn>, ClientDtoValidator>();
-builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
-builder.Services.AddTransient<ISignupModelConverter, SignUpModelConverter>();
+builder.Services.AddScoped<IDtoValidator<ClientDtoIn>, ClientDtoValidator>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<ISignupModelConverter, SignUpModelConverter>();
 
 var passVal = new PasswordValidator();
 passVal.ShouldContainLowerCaseLetters()
