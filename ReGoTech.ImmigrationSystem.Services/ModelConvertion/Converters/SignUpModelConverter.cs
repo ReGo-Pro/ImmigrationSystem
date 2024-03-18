@@ -3,29 +3,27 @@ using ReGoTech.ImmigrationSystem.Models.DataTransferObjects.Outbound;
 using ReGoTech.ImmigrationSystem.Models.Entities;
 using ReGoTech.ImmigrationSystem.Models.MixedModels;
 using ReGoTech.ImmigrationSystem.Services.ModelConvertion.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ReGoTech.ImmigrationSystem.Services.ModelConvertion.Converters
 {
 	public class SignUpModelConverter : ISignupModelConverter
 	{
 		public SignUpModel ConvertFromDto(ClientDtoIn dto) {
+			var passwordSalt = BCrypt.Net.BCrypt.GenerateSalt();
+			var hasehdPassword = BCrypt.Net.BCrypt.HashPassword(dto.Password, passwordSalt);
+
 			var client = new Client() {
 				FirstName = dto.FirstName,
 				LastName = dto.LastName,
 				Type = dto.Type,
-				Uid = "UniqueId"
+				Uid = "UniqueId"	// TODO: A service to generate unique IDs with length = 10
 			};
 
 			var clientLogin = new ClientLogin() {
 				Client = client,
 				Username = dto.Username,
-				PasswordHash = dto.Password,        // TODO: Hash the password
-				PasswordSalt = "PasswordSalt",      // TODO: Get from hash function
+				PasswordHash = hasehdPassword,
+				PasswordSalt = passwordSalt,
 				Email = dto.Email,
 				IsEmailVerified = false,
 				IsLockedOut = false,
