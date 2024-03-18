@@ -19,15 +19,15 @@ namespace ReGoTech.ImmigrationSystem.Services.DtoValidation
 			_passwordValidator = passwordValidator;
 		}
 
-		protected override void DoValidate(ClientDtoIn dto) {
+		protected override async Task DoValidate(ClientDtoIn dto) {
 			// There are some basic validations on ClientDtoIn level (as attributes) so we skip duplicate validations here. 
 			if (dto.Password != dto.PasswordRepeat) {
 				AddError(nameof(dto.PasswordRepeat), "Passwords do not match"); // TODO: support multilingual 
 			}
 
-			var existingClient = _accountUnitOfWork.ClientLoginRepository
-				.FirstOrDefaultAsync(x => x.Username.ToLower() == dto.Username.ToLower());
-			if (existingClient != null) {
+			var usernameExists = await _accountUnitOfWork.ClientLoginRepository
+				.AnyAsync(x => x.Username == dto.Username);
+			if (usernameExists) {
 				AddError(nameof(dto.Username), "Username already exists. Please choose another one.");
 			}
 			

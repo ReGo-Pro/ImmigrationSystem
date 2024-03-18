@@ -34,7 +34,7 @@ namespace ReGoTech.ImmigrationSystem.API.Controllers
 				return BadRequest(ModelState);
 			}
 
-			_clientDtoValidator.Validate(dto);
+			await _clientDtoValidator.Validate(dto);
 			if (_clientDtoValidator.HasError) {
 				return BadRequest(_clientDtoValidator.ValidationErrors);
 			}

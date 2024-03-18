@@ -3,6 +3,7 @@ using ReGoTech.ImmigrationSystem.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,8 +27,8 @@ namespace ReGoTech.ImmigrationSystem.Data.EntityFramework.Repositories
 			return await _dbContext.FindAsync<List<TEntity>>(predicate);
 		}
 
-		public async Task<TEntity> FirstOrDefaultAsync(Func<TEntity, bool> predicate) {
-			return await _dbContext.Set<TEntity>().FirstOrDefaultAsync();
+		public async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate) {
+			return await _dbContext.Set<TEntity>().AnyAsync(predicate);
 		}
 
 		public void Add(TEntity entity) {

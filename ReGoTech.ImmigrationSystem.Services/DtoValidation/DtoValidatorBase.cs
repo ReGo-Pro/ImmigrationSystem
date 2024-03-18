@@ -19,8 +19,8 @@ namespace ReGoTech.ImmigrationSystem.Services.DtoValidation
 
 		public IReadOnlyList<DtoValidationError> ValidationErrors => ErrorList.AsReadOnly();
 
-		public void Validate(T model) {
-			DoValidate(model);
+		public async Task Validate(T model) {
+			await DoValidate(model);
 		}
 
 		protected void AddError(string propertyName, string errorMessage) {
@@ -29,7 +29,7 @@ namespace ReGoTech.ImmigrationSystem.Services.DtoValidation
 				ErrorMessage = errorMessage 
 			});
 		}
-		protected abstract void DoValidate(T model);
+		protected abstract Task DoValidate(T model);
 
 	}
 }

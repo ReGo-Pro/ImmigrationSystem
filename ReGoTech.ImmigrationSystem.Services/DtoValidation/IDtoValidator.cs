@@ -9,7 +9,7 @@ namespace ReGoTech.ImmigrationSystem.Services.DtoValidation
 {
 	public interface IDtoValidator<T>
 	{
-		void Validate(T model);
+		Task Validate(T model);
 		IReadOnlyList<DtoValidationError> ValidationErrors { get; }
 		bool HasError { get; }
 	}
