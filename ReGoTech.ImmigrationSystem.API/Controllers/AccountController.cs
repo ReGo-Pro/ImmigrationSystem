@@ -11,10 +11,10 @@ namespace ReGoTech.ImmigrationSystem.API.Controllers
 	public class AccountController : ApiController
 	{
 		private IDtoValidator<ClientDtoIn> _clientDtoValidator;
-		private IAccountUnitOfWork _accountUnitOfWork;
+		private IUnitOfWork _accountUnitOfWork;
 		private ISignupModelConverter _signupModelConverter;
 
-		public AccountController(IAccountUnitOfWork accountUnitOfWork,
+		public AccountController(IUnitOfWork accountUnitOfWork,
 								 ISignupModelConverter signupModelConverter,
 								 IDtoValidator<ClientDtoIn> clientDtoValidator) {
 			_clientDtoValidator = clientDtoValidator;

@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace ReGoTech.ImmigrationSystem.Data.EntityFramework.WorkUnits
 {
-	public class AccountUnitOfWork : IAccountUnitOfWork
+	public class UnitOfWork : IUnitOfWork
 	{
 		private AppDbContext _dbContext;
 
-		public AccountUnitOfWork(AppDbContext dbContext) {
+		public UnitOfWork(AppDbContext dbContext) {
 			_dbContext = dbContext;
 		}
 

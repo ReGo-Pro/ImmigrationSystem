@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ReGoTech.ImmigrationSystem.Data
 {
-	public interface IAccountUnitOfWork
+	public interface IUnitOfWork
 	{
 		IRepository<Client> ClientRepository { get; }
 		IRepository<ClientLogin> ClientLoginRepository { get; }

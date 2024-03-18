@@ -22,7 +22,7 @@ builder.Services.AddSwaggerGen();
 // We must add entity framework
 builder.Services.AddEFWithSqlServer(connectionString);
 builder.Services.AddTransient<IDtoValidator<ClientDtoIn>, ClientDtoValidator>();
-builder.Services.AddTransient<IAccountUnitOfWork, AccountUnitOfWork>();
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddTransient<ISignupModelConverter, SignUpModelConverter>();
 
 var passVal = new PasswordValidator();

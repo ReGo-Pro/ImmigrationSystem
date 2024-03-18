@@ -12,9 +12,9 @@ namespace ReGoTech.ImmigrationSystem.Services.DtoValidation
 {
 	public class ClientDtoValidator : DtoValidatorBase<ClientDtoIn>
 	{
-		private IAccountUnitOfWork _accountUnitOfWork;
+		private IUnitOfWork _accountUnitOfWork;
 		private PasswordValidator _passwordValidator;
-		public ClientDtoValidator(IAccountUnitOfWork accountUnitOfWork, PasswordValidator passwordValidator) {
+		public ClientDtoValidator(IUnitOfWork accountUnitOfWork, PasswordValidator passwordValidator) {
 			_accountUnitOfWork = accountUnitOfWork;
 			_passwordValidator = passwordValidator;
 		}
