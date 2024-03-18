@@ -26,7 +26,7 @@ namespace ReGoTech.ImmigrationSystem.Services.DtoValidation
 			}
 
 			var usernameExists = await _accountUnitOfWork.ClientLoginRepository
-				.AnyAsync(x => x.Username == dto.Username);
+				.AnyAsync(x => x.Username.ToLower() == dto.Username.ToLower());
 			if (usernameExists) {
 				AddError(nameof(dto.Username), "Username already exists. Please choose another one.");
 			}
