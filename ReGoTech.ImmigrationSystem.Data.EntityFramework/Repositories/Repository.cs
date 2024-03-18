@@ -23,8 +23,8 @@ namespace ReGoTech.ImmigrationSystem.Data.EntityFramework.Repositories
 		public async Task<List<TEntity>> GetAllAsync() {
 			return await _dbContext.Set<TEntity>().ToListAsync();
 		}
-		public async Task<List<TEntity>> GetAllAsync(Func<TEntity, bool> predicate) {
-			return await _dbContext.FindAsync<List<TEntity>>(predicate);
+		public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate) {
+			return await _dbContext.Set<TEntity>().Where(predicate).ToListAsync();
 		}
 
 		public async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate) {

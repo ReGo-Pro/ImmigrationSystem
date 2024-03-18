@@ -10,7 +10,7 @@ namespace ReGoTech.ImmigrationSystem.Data
 	public interface IRepository<TEntity> where TEntity : class
 	{
 		Task<TEntity> GetByIdAsync(int id);
-		Task<List<TEntity>> GetAllAsync(Func<TEntity, bool> predicate);
+		Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate);
 		Task<List<TEntity>> GetAllAsync();
 
 		Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate);
