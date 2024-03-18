@@ -19,15 +19,12 @@ A.	From Microsoft Copilot and my own tests
 		-	Domain-Driven Design (DDD) Validators: If you follow DDD principles, consider placing validation logic within your domain entities or value objects
 	* The first thing I'll test in this project is "Service Layer Validation"
 ======================================================================================================================================================================
-Q.	I want to use a unit of work for each controller in my ASP.NET API application. Is this a good approach?
-A.	From Microsoft Copilot and my own tests and research
-	Certainly! Using a unit of work pattern for each controller in your ASP.NET Core API application is a good approach. Here's why:
-		-	By employing a unit of work per controller, you achieve better modularity and separation of concerns
-		-	Creating a unit of work per controller ensures that the database context is scoped appropriately
-		-	With a unit of work per controller, you can easily manage transactions
-		-	The unit of work coordinates the repositories, ensuring consistent behavior across related actions
-		-	When writing unit tests, you can easily mock the unit of work and repositories separately
-		-	Customization: By having a unit of work per controller, you can customize it based on the controller’s needs (e.g., adding specific repository methods)
+Q.	Is it OK to use a single UnitOfWork service for my entire application?
+A.	Yes and No! 
+	If the application is fairly small, all of the required service interfaces can be defined inside a UnitOfWork Interface and it can be passed throughout the app. 
+	Since ASP.NET Core's DI container handles service instanciation in a lazy fashion (for scoped services), the services that are not explicitly requested will not
+	be instanciated, so no worries there. However the UnitOfWork can grow and become very large and hard to manage as the application grows.
+	So maybe it's a good idea to have multiple UnitOfWork interfaces for different scopes of the application (something like bounded context in DDD).
 ======================================================================================================================================================================
 Q.	Comparing having SaveChanges in repo vs single unit of work vs unit of work per controller. 
 A.	From my own research and testing and thinking
@@ -47,3 +44,9 @@ A.	By default, when you call SaveChanges (or SaveChangesAsync) on the DbContext,
 	changes are committed or rolled back. If you handle multiple DbSet instances within the same transaction, a failure in one set won’t affect the others until you 
 	explicitly commit or roll back the transaction.
 ======================================================================================================================================================================
+Q.	What are 3 different service scopes in ASP.NET DI and what does each one mean? (just to refresh my memory)
+A.	Singleton: an instance of the service is created once and the same instance is used throughout the application until the application is shut down.
+	Scoped: an instance of the service is created for each request which stays alive while the request is in porgress.
+	Transient: everytime a new instance of the service is required, a fresh one is created. This means that even within the same request we never use the same instance.
+======================================================================================================================================================================
+Q.	
