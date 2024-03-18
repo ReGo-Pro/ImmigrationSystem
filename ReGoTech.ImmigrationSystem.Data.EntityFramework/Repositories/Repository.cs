@@ -21,7 +21,7 @@ namespace ReGoTech.ImmigrationSystem.Data.EntityFramework.Repositories
 			return await _dbContext.FindAsync<TEntity>(id);
 		}
 		public async Task<List<TEntity>> GetAllAsync() {
-			return await _dbContext.FindAsync<List<TEntity>>();
+			return await _dbContext.Set<TEntity>().ToListAsync();
 		}
 		public async Task<List<TEntity>> GetAllAsync(Func<TEntity, bool> predicate) {
 			return await _dbContext.FindAsync<List<TEntity>>(predicate);
