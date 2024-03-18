@@ -13,8 +13,10 @@ namespace ReGoTech.ImmigrationSystem.Services.DtoValidation
 	public class ClientDtoValidator : DtoValidatorBase<ClientDtoIn>
 	{
 		private IAccountUnitOfWork _accountUnitOfWork;
-		public ClientDtoValidator(IAccountUnitOfWork accountUnitOfWork) {
+		private PasswordValidator _passwordValidator;
+		public ClientDtoValidator(IAccountUnitOfWork accountUnitOfWork, PasswordValidator passwordValidator) {
 			_accountUnitOfWork = accountUnitOfWork;
+			_passwordValidator = passwordValidator;
 		}
 
 		protected override void DoValidate(ClientDtoIn dto) {
@@ -42,7 +44,9 @@ namespace ReGoTech.ImmigrationSystem.Services.DtoValidation
 				AddError(nameof(dto.Username), "Username can only contain alphanumeric and _ characters");
 			}
 
-			// TODO: Password strength validation (length, complexity, etc.)
+			if (!_passwordValidator.Validate(dto.Password)) {
+				AddError(nameof(dto.Password), _passwordValidator.ErrorMessage);
+			}
 		}
 	}
 }
