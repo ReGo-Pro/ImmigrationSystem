@@ -1,6 +1,6 @@
 ﻿using ReGoTech.ImmigrationSystem.Models.DataTransferObjects.Inbound;
 using ReGoTech.ImmigrationSystem.Models.DataTransferObjects.Outbound;
-using ReGoTech.ImmigrationSystem.Models.MixedModels;
+using ReGoTech.ImmigrationSystem.Models.CompositeModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

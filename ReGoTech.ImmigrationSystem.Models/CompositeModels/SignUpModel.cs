@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ReGoTech.ImmigrationSystem.Models.MixedModels
+namespace ReGoTech.ImmigrationSystem.Models.CompositeModels
 {
 	public class SignUpModel
 	{
