@@ -54,3 +54,14 @@ Q.	Why am I getting exception when trying to access association properties on en
 	-	install the required package: Microsoft.EntityFrameworkCore.Proxies
 	-	Enable lazy loading by using UseLazyLoadingProxies() when registering DbContext in DI. (see the code)
 ======================================================================================================================================================================
+Q.	Why is the compiler complaining about the following code (ToListAsync is not defined):
+	public async Task<List<TEntity>> GetAllAsync(Func<TEntity, bool> predicate) {
+		return await _dbContext.Set<TEntity>().Where(predicate).ToListAsync();
+	}
+A.	The reason is that when we want to deal with generic DbContext and its sets, all filtering inputs must be of type Expression and not Func. So we should rewrite the
+	code like this:
+	public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate)
+	Now the compiler does not complain. The reason is that when you pass an expression, compiler treats Where clause as being applied to IQueriable, but when you pass 
+	Func directly, the compiler thinks Where is applied to an IEnumerable which indeed does not contain ToLystAsync. 
+	* So when dealing with custom methods on DbContext, always use Expression<Func> as input
+======================================================================================================================================================================
