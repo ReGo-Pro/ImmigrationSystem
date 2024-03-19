@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ReGoTech.ImmigrationSystem.Models.DataTransferObjects.Inbound;
-using ReGoTech.ImmigrationSystem.Models.Entities;
 using ReGoTech.ImmigrationSystem.Services.DtoValidation;
 using ReGoTech.ImmigrationSystem.Data;
 using ReGoTech.ImmigrationSystem.Services.ModelConvertion.Contracts;
