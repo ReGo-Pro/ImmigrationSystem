@@ -49,4 +49,8 @@ A.	Singleton: an instance of the service is created once and the same instance i
 	Scoped: an instance of the service is created for each request which stays alive while the request is in porgress.
 	Transient: everytime a new instance of the service is required, a fresh one is created. This means that even within the same request we never use the same instance.
 ======================================================================================================================================================================
-Q.	
+Q.	Why am I getting exception when trying to access association properties on entities (example: ClientLogin from Clien)
+	The reason is that by default lazy loading is not enabled in EF Core. In order to enable it, you have to follow the following steps:
+	-	install the required package: Microsoft.EntityFrameworkCore.Proxies
+	-	Enable lazy loading by using UseLazyLoadingProxies() when registering DbContext in DI. (see the code)
+======================================================================================================================================================================
