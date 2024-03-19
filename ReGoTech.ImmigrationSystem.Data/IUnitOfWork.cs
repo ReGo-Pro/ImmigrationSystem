@@ -2,7 +2,7 @@
 
 namespace ReGoTech.ImmigrationSystem.Data
 {
-	public interface IUnitOfWork
+	public interface IUnitOfWork : IDisposable
 	{
 		IRepository<Client> ClientRepository { get; }
 		IRepository<ClientLogin> ClientLoginRepository { get; }

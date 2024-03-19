@@ -18,5 +18,9 @@ namespace ReGoTech.ImmigrationSystem.Data.EntityFramework.WorkUnits
 		public async Task CompleteAsync() {
 			await _dbContext.SaveChangesAsync();
 		}
+
+		public void Dispose() {
+			_dbContext.Dispose();
+		}
 	}
 }
