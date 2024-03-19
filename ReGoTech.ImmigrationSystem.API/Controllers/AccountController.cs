@@ -21,11 +21,6 @@ namespace ReGoTech.ImmigrationSystem.API.Controllers
 			_signupModelConverter = signupModelConverter;
 		}
 
-		[HttpGet]
-		public async Task<IActionResult> Get() {
-			return Ok("Hello world");
-		}
-
 		[HttpPost("SignUp")]
 		[AllowAnonymous]
 		public async Task<IActionResult> SignUp(ClientDtoIn dto) {
