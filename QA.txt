@@ -25,6 +25,7 @@ A.	Yes and No!
 	Since ASP.NET Core's DI container handles service instanciation in a lazy fashion (for scoped services), the services that are not explicitly requested will not
 	be instanciated, so no worries there. However the UnitOfWork can grow and become very large and hard to manage as the application grows.
 	So maybe it's a good idea to have multiple UnitOfWork interfaces for different scopes of the application (something like bounded context in DDD).
+	* Also when using a single repository for entire application it is absolutely essential to make sure to use lazy instanciation for repositories.
 ======================================================================================================================================================================
 Q.	Comparing having SaveChanges in repo vs single unit of work vs unit of work per controller. 
 A.	From my own research and testing and thinking
