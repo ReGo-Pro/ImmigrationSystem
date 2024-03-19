@@ -40,9 +40,14 @@ namespace ReGoTech.ImmigrationSystem.API.Controllers
 
 			// TODO: Figure out what shoule be returned as URI here
 			return Created("", _signupModelConverter.ConvertToDto(model));
+
+			// Also email verification
 		}
 
-		// Login (anonymous)
+		[AllowAnonymous]
+		public async Task<IActionResult> Login() {
+			throw new NotImplementedException();
+		}
 
 		// Remove client (should be authenticated - just for same client - and admin)
 		// Update client (should be authenticated - just for same client - and admin)
