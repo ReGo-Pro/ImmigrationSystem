@@ -35,6 +35,7 @@ namespace ReGoTech.ImmigrationSystem.API.Controllers
 			// Also email verification
 		}
 
+		[HttpGet("Login")]
 		[AllowAnonymous]
 		public async Task<IActionResult> Login() {
 			throw new NotImplementedException();
