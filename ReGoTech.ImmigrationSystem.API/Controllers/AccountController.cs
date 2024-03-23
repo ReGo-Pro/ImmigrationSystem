@@ -4,21 +4,16 @@ using ReGoTech.ImmigrationSystem.Models.DataTransferObjects.Inbound;
 using ReGoTech.ImmigrationSystem.Services.DtoValidation;
 using ReGoTech.ImmigrationSystem.Data;
 using ReGoTech.ImmigrationSystem.Services.ModelConvertion.Contracts;
+using ReGoTech.ImmigrationSystem.Services;
 
 namespace ReGoTech.ImmigrationSystem.API.Controllers
 {
 	public class AccountController : ApiController
 	{
-		private IDtoValidator<ClientDtoIn> _clientDtoValidator;
-		private IUnitOfWork _uow;
-		private ISignupModelConverter _signupModelConverter;
+		IAccountService _accountService;
 
-		public AccountController(IUnitOfWork accountUnitOfWork,
-								 ISignupModelConverter signupModelConverter,
-								 IDtoValidator<ClientDtoIn> clientDtoValidator) {
-			_clientDtoValidator = clientDtoValidator;
-			_uow = accountUnitOfWork;
-			_signupModelConverter = signupModelConverter;
+		public AccountController(IAccountService accountService) {
+			_accountService = accountService;
 		}
 
 		[HttpPost("SignUp")]
@@ -28,17 +23,14 @@ namespace ReGoTech.ImmigrationSystem.API.Controllers
 				return BadRequest(ModelState);
 			}
 
-			if (! await _clientDtoValidator.IsValid(dto)) {
-				return BadRequest(_clientDtoValidator.ValidationErrors);
+			if (! await _accountService.IsDtoValid(dto)) {
+				return BadRequest(_accountService);
 			}
 
-			var model = _signupModelConverter.ConvertFromDto(dto);
-			_uow.ClientRepository.Add(model.Client);
-			_uow.ClientLoginRepository.Add(model.ClientLogin);
-			await _uow.CompleteAsync();
+			var model = _accountService.ConvertToModel(dto);
+			await _accountService.AddClientAsync(model);
 
-			// TODO: Figure out what shoule be returned as URI here
-			return Created("", _signupModelConverter.ConvertToDto(model));
+			return Created("", _accountService.ConvertToDto(model));
 
 			// Also email verification
 		}
