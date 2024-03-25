@@ -19,5 +19,6 @@ namespace ReGoTech.ImmigrationSystem.Services
 		IReadOnlyList<DtoValidationError> DtoValidationErrors { get; }
 
 		Task AddClientAsync(SignUpModel model);
+		Task SendVerificationEmailAsync(SignUpModel model, string verificationEndpointUrl);
 	}
 }

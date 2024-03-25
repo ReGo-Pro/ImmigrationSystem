@@ -8,7 +8,7 @@ namespace ReGoTech.ImmigrationSystem.Services
 	public class EmailService : IEmailService
 	{
 		// TODO: make this service configurable so that Program.cs can pass configurations to it (like smtp service, username, password, etc.)
-		async Task IEmailService.SendAsync(string email, string subject, string body) {
+		public async Task SendAsync(string email, string subject, string body) {
 			try {
 				var message = new MimeMessage();
 				message.From.Add(MailboxAddress.Parse("welcome@regotech.net"));
@@ -26,7 +26,6 @@ namespace ReGoTech.ImmigrationSystem.Services
 			catch (Exception) {
 				throw;
 			}
-			
 		}
 	}
 }

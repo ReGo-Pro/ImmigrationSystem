@@ -14,7 +14,7 @@ namespace ReGoTech.ImmigrationSystem.Services.DtoValidation
 
 		public async Task<bool> IsValid(T model) {
 			await DoValidate(model);
-			return ErrorList.Any();
+			return ErrorList.Count == 0;
 		}
 
 		protected void AddError(string propertyName, string errorMessage) {

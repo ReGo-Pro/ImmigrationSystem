@@ -5,6 +5,9 @@ using ReGoTech.ImmigrationSystem.Services.DtoValidation;
 using ReGoTech.ImmigrationSystem.Data.EntityFramework;
 using ReGoTech.ImmigrationSystem.Services.ModelConvertion.Contracts;
 using ReGoTech.ImmigrationSystem.Services.ModelConvertion.Converters;
+using ReGoTech.ImmigrationSystem.Services;
+using ReGoTech.ImmigrationSystem.Models.CompositeModels;
+using ReGoTech.ImmigrationSystem.Models.DataTransferObjects.Outbound;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +27,10 @@ builder.Services.AddEFWithSqlServer(connectionString);
 builder.Services.AddScoped<IDtoValidator<ClientDtoIn>, ClientDtoValidator>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ISignupModelConverter, SignUpModelConverter>();
+
+builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<ISignupModelConverter, SignUpModelConverter>();
+builder.Services.AddScoped<IAccountService, AccountService>();
 
 var passVal = new PasswordValidator();
 passVal.ShouldContainLowerCaseLetters()
