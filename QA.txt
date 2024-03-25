@@ -52,8 +52,8 @@ A.	Singleton: an instance of the service is created once and the same instance i
 ======================================================================================================================================================================
 Q.	Why am I getting exception when trying to access association properties on entities (example: ClientLogin from Clien)
 	The reason is that by default lazy loading is not enabled in EF Core. In order to enable it, you have to follow the following steps:
-	-	install the required package: Microsoft.EntityFrameworkCore.Proxies
-	-	Enable lazy loading by using UseLazyLoadingProxies() when registering DbContext in DI. (see the code)
+		-	install the required package: Microsoft.EntityFrameworkCore.Proxies
+		-	Enable lazy loading by using UseLazyLoadingProxies() when registering DbContext in DI. (see the code)
 ======================================================================================================================================================================
 Q.	Why is the compiler complaining about the following code (ToListAsync is not defined):
 	public async Task<List<TEntity>> GetAllAsync(Func<TEntity, bool> predicate) {
@@ -65,4 +65,21 @@ A.	The reason is that when we want to deal with generic DbContext and its sets, 
 	Now the compiler does not complain. The reason is that when you pass an expression, compiler treats Where clause as being applied to IQueriable, but when you pass 
 	Func directly, the compiler thinks Where is applied to an IEnumerable which indeed does not contain ToLystAsync. 
 	* So when dealing with custom methods on DbContext, always use Expression<Func> as input
+======================================================================================================================================================================
+Q.	Is it generally a good idea to only use services in controller and not repositories directly?
+A.	[Both copilot and ChatGPT and my own research]
+	Yes, it is generally recommended to use services in your controllers and not repositories directly. This is known as the Service Layer pattern. Here's why:
+		-	Separation of Concerns: By using services in your controllers, you separate the concerns of data access (repositories) and business logic (services). 
+			This makes your code more modular and easier to maintain.
+		-	Reusability: Services often contain business logic that can be reused across multiple controllers. If you use repositories directly in your controllers, 
+			you may end up duplicating code.
+		-	Abstraction: Services provide a higher level of abstraction than repositories. They hide the details of data access and allow controllers to work with 
+			simple method calls.
+		-	Testability: It’s easier to write unit tests for controllers and services when they are decoupled from the repositories. You can mock the services in your 
+			controller tests, and mock the repositories in your service tests.
+======================================================================================================================================================================
+Q.	How should I deal with sending emails on development machine?
+A.	Well, firstly Microsoft recommends using MailKit package instead of it's own SMTP client. So you should install this package in your service layer. 
+	For email test you can use "Ethereal". It's a free mail server which is extremely easy to use. Here's the address: https://ethereal.email/
+	Also this YouTube video is a good tutorial for sending mail in .NET Core: https://www.youtube.com/watch?v=PvO_1T0FS_A
 ======================================================================================================================================================================
