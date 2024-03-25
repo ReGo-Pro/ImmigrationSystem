@@ -49,6 +49,7 @@ namespace ReGoTech.ImmigrationSystem.Services
 
 		public async Task AddClientAsync(SignUpModel model) {
 			model.ClientLogin.EmailVerificationCode = Guid.NewGuid().ToString("N");
+			model.ClientLogin.LastVerificationSentTime = DateTime.Now;
 			_uow.ClientRepository.Add(model.Client);
 			_uow.ClientLoginRepository.Add(model.ClientLogin);
 			await _uow.CompleteAsync();
