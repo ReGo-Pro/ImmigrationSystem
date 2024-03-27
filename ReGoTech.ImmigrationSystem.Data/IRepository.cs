@@ -9,6 +9,8 @@ namespace ReGoTech.ImmigrationSystem.Data
 		Task<List<TEntity>> GetAllAsync();
 
 		Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate);
+		Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate);
+		Task<TEntity> FirstOrDefaultAsync(Expression<Func <TEntity, bool>> predicate);
 
 		void Add(TEntity entity);
 		void AddRange(IEnumerable<TEntity> entities);

@@ -26,6 +26,15 @@ namespace ReGoTech.ImmigrationSystem.Data.EntityFramework.Repositories
 			return await _dbContext.Set<TEntity>().AnyAsync(predicate);
 		}
 
+		public async Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate) {
+			return await _dbContext.Set<TEntity>().SingleOrDefaultAsync(predicate);
+		}
+
+		public async Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate) {
+			// TODO: add another method that acceps an ordering expression
+			return await _dbContext.Set<TEntity>().FirstOrDefaultAsync(predicate);
+		}
+
 		public void Add(TEntity entity) {
 			_dbContext.Add(entity);
 		}
