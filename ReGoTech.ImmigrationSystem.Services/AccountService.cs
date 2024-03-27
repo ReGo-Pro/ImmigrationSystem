@@ -88,5 +88,17 @@ ReGoTech.net Team</pre>
 				}
 			}
 		}
+
+		public async Task<bool> VerifyClientEmail(string UID, string verificationCode) {
+			var client = await _uow.ClientRepository.SingleOrDefaultAsync(x => x.Uid == UID);
+			if (client.ClientLogin.EmailVerificationCode == verificationCode) {
+				client.ClientLogin.IsEmailVerified = true;
+				await _uow.CompleteAsync();
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
 	}
 }

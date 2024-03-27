@@ -31,10 +31,8 @@ namespace ReGoTech.ImmigrationSystem.API.Controllers
 
 			// TODO: This should be coming from the request:
 			var verificationEndpoint = $"https://localhost:7225/api/v1/Account/VerifyEmail?Uid={model.Client.Uid}&verificationCode={model.ClientLogin.EmailVerificationCode}";
-			await _accountService.SendVerificationEmailAsync(model, verificationEndpoint);
+			await _accountService.SendVerificationEmailAsync(model, verificationEndpoint); 
 			return Created("", _accountService.ConvertToDto(model));
-
-			// Also email verification
 		}
 
 		[HttpGet("Login")]
@@ -47,7 +45,11 @@ namespace ReGoTech.ImmigrationSystem.API.Controllers
 		[AllowAnonymous]
 		public async Task<IActionResult> VerifyEmail([FromQuery]string Uid, string verificationCode) {
 			// TODO: Mark user email as verifieds
-			throw new NotImplementedException(); // TODO: multilingual
+			if (await _accountService.VerifyClientEmail(Uid, verificationCode)) {
+				return Ok("Email verified successfully");		// TODO: better message + multilingual
+			}
+
+			return BadRequest("Email verification failed. Please make sure the verification code is correct.");     // TODO: multilingual
 		}
 
 		// Remove client (should be authenticated - just for same client - and admin)

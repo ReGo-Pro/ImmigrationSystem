@@ -20,7 +20,7 @@ namespace ReGoTech.ImmigrationSystem.Services
 
 				var smtp = new SmtpClient();
 				smtp.Connect("smtp.ethereal.email", 587, SecureSocketOptions.StartTls);
-				smtp.Authenticate("kolby.hintz@ethereal.email", "gKqneDk2p6sYYPWteS");
+				smtp.Authenticate("mallory.grimes67@ethereal.email", "u8SaAfVcAANX5YaMCR");
 				await smtp.SendAsync(message);
 			}
 			catch (Exception) {

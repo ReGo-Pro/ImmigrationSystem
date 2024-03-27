@@ -20,5 +20,6 @@ namespace ReGoTech.ImmigrationSystem.Services
 
 		Task AddClientAsync(SignUpModel model);
 		Task SendVerificationEmailAsync(SignUpModel model, string verificationEndpointUrl);
+		Task<bool> VerifyClientEmail(string UID, string verificationCode);
 	}
 }
