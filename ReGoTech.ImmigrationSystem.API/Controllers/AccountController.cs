@@ -52,6 +52,11 @@ namespace ReGoTech.ImmigrationSystem.API.Controllers
 			return BadRequest("Email verification failed. Please make sure the verification code is correct.");     // TODO: multilingual
 		}
 
+		[HttpGet("Secret")]
+		public IActionResult GetSecret() {
+			return Ok("This is protected secret data");
+		}
+
 		// Remove client (should be authenticated - just for same client - and admin)
 		// Update client (should be authenticated - just for same client - and admin)
 		// GetClient (should be authenticated - just for same client - and admin)

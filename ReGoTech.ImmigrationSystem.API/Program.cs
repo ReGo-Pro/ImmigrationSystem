@@ -8,6 +8,9 @@ using ReGoTech.ImmigrationSystem.Services.ModelConvertion.Converters;
 using ReGoTech.ImmigrationSystem.Services;
 using ReGoTech.ImmigrationSystem.Models.CompositeModels;
 using ReGoTech.ImmigrationSystem.Models.DataTransferObjects.Outbound;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +20,24 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
 // TODO: move to secret AppConfig
-string connectionString = "Server=REGO\\SQLEXPRESS;Database=ImmigrationMaster;User Id=sa;Password=R_123456;Encrypt=True;TrustServerCertificate=True;";   
+string connectionString = "Server=REGO\\SQLEXPRESS;Database=ImmigrationMaster;User Id=sa;Password=R_123456;Encrypt=True;TrustServerCertificate=True;";
+
+// TODO: Move to secret AppConfig and cleanup a bit
+builder.Services.AddAuthentication(o => {
+	o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+	o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+	o.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(o => {
+	o.TokenValidationParameters = new() {
+		ValidIssuer = "https://localhost:7225",
+		ValidAudience = "https://localhost:7225",
+		IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("P@ssW0rd!")),
+		ValidateIssuer = true,
+		ValidateAudience = true,
+		ValidateLifetime = true
+	};
+});
+builder.Services.AddAuthorization();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -50,6 +70,7 @@ if (app.Environment.IsDevelopment()) {
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
