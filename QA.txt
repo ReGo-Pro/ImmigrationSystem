@@ -83,3 +83,8 @@ A.	Well, firstly Microsoft recommends using MailKit package instead of it's own 
 	For email test you can use "Ethereal". It's a free mail server which is extremely easy to use. Here's the address: https://ethereal.email/
 	Also this YouTube video is a good tutorial for sending mail in .NET Core: https://www.youtube.com/watch?v=PvO_1T0FS_A
 ======================================================================================================================================================================
+Q.	When using BCrypt, do I need to store salt in a separate column in database? Why or why not?
+A.	No, there is no need to store the salt separately as the BCrypt will prepend password hash with the given salt in the prosess and automatically extracts the salt
+	from hashed password when trying to verify it. So it is enough to only store hashed password that is the result of the following function:
+	BCrypt.Net.BCrypt.HashPassword(dto.Password, passwordSalt);
+======================================================================================================================================================================
