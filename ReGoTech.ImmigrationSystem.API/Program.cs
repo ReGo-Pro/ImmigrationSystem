@@ -31,7 +31,7 @@ builder.Services.AddAuthentication(o => {
 	o.TokenValidationParameters = new() {
 		ValidIssuer = "https://localhost:7225",
 		ValidAudience = "https://localhost:7225",
-		IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("P@ssW0rd!")),
+		IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("_P@ssW0rd!_0123456_P@ssW0rd!_0123456_P@ssW0rd!_0123456")),
 		ValidateIssuer = true,
 		ValidateAudience = true,
 		ValidateLifetime = true
@@ -45,6 +45,7 @@ builder.Services.AddSwaggerGen();
 // We must add entity framework
 builder.Services.AddEFWithSqlServer(connectionString);
 builder.Services.AddScoped<IDtoValidator<ClientDtoIn>, ClientDtoValidator>();
+builder.Services.AddScoped<IDtoValidator<LoginDtoIn>, LoginDtoValidator>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ISignupModelConverter, SignUpModelConverter>();
 

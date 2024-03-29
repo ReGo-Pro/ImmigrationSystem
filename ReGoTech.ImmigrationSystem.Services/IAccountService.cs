@@ -13,7 +13,8 @@ namespace ReGoTech.ImmigrationSystem.Services
 {
 	public interface IAccountService
 	{
-		Task<bool> IsDtoValid(ClientDtoIn dto);
+		Task<bool> IsClientDtoValid(ClientDtoIn dto);
+		Task<bool> IsLoginDtoValid(LoginDtoIn dto);
 		SignUpModel ConvertToModel(ClientDtoIn dto);
 		ClientDtoOut ConvertToDto(SignUpModel model);
 		IReadOnlyList<DtoValidationError> DtoValidationErrors { get; }
@@ -21,5 +22,7 @@ namespace ReGoTech.ImmigrationSystem.Services
 		Task AddClientAsync(SignUpModel model);
 		Task SendVerificationEmailAsync(SignUpModel model, string verificationEndpointUrl);
 		Task<bool> VerifyClientEmail(string UID, string verificationCode);
+
+		Task<LoginDtoOut> LoginClientAsync(LoginDtoIn dto);
 	}
 }

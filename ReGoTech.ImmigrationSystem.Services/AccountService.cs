@@ -1,4 +1,6 @@
-﻿using ReGoTech.ImmigrationSystem.Data;
+﻿using Microsoft.IdentityModel.JsonWebTokens;
+using Microsoft.IdentityModel.Tokens;
+using ReGoTech.ImmigrationSystem.Data;
 using ReGoTech.ImmigrationSystem.Models.CompositeModels;
 using ReGoTech.ImmigrationSystem.Models.DataTransferObjects;
 using ReGoTech.ImmigrationSystem.Models.DataTransferObjects.Inbound;
@@ -8,34 +10,43 @@ using ReGoTech.ImmigrationSystem.Services.DtoValidation;
 using ReGoTech.ImmigrationSystem.Services.ModelConvertion.Contracts;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ReGoTech.ImmigrationSystem.Services
 {
-	public class AccountService : IAccountService
-	{
+	public class AccountService : IAccountService {
 		private IUnitOfWork _uow;
 		private ISignupModelConverter _signUpModelConverter;
-		private IDtoValidator<ClientDtoIn> _dtoValidator;
+		private IDtoValidator<ClientDtoIn> _clientDtoValidator;
+		private IDtoValidator<LoginDtoIn> _loginDtoValidator;
 		private IEmailService _emailService;
 
-		public IReadOnlyList<DtoValidationError> DtoValidationErrors => _dtoValidator.ValidationErrors;
+		public IReadOnlyList<DtoValidationError> DtoValidationErrors {
+			get {
+				return _clientDtoValidator.ValidationErrors
+					.Union(_loginDtoValidator.ValidationErrors).ToList();
+			}
+		}
 
 		public AccountService(IUnitOfWork unitOfWork,
 			ISignupModelConverter modelConverter,
-			IDtoValidator<ClientDtoIn> dtoValidator,
+			IDtoValidator<ClientDtoIn> clientDtoValidator,
+			IDtoValidator<LoginDtoIn> loginDtoValidator,
 			IEmailService emailService) {
 			_uow = unitOfWork;
 			_signUpModelConverter = modelConverter;
-			_dtoValidator = dtoValidator;
+			_clientDtoValidator = clientDtoValidator;
 			_emailService = emailService;
+			_loginDtoValidator = loginDtoValidator;
 		}
 
-		public async Task<bool> IsDtoValid(ClientDtoIn dto) {
-			return await _dtoValidator.IsValid(dto);
+		public async Task<bool> IsClientDtoValid(ClientDtoIn dto) {
+			return await _clientDtoValidator.IsValid(dto);
 		}
 
 		public SignUpModel ConvertToModel(ClientDtoIn dto) {
@@ -46,6 +57,9 @@ namespace ReGoTech.ImmigrationSystem.Services
 			return _signUpModelConverter.ConvertToDto(model);
 		}
 
+		public async Task<bool> IsLoginDtoValid(LoginDtoIn dto) {
+			return await _loginDtoValidator.IsValid(dto);
+		}
 
 		public async Task AddClientAsync(SignUpModel model) {
 			model.ClientLogin.EmailVerificationCode = Guid.NewGuid().ToString("N");
@@ -99,6 +113,41 @@ ReGoTech.net Team</pre>
 			else {
 				return false;
 			}
+		}
+
+		public async Task<LoginDtoOut> LoginClientAsync(LoginDtoIn dto) {
+			var userLogin = await _uow.ClientLoginRepository.SingleOrDefaultAsync(x => x.Username == dto.Username);
+			// userLogin shouldn't be null
+			if (userLogin != null && BCrypt.Net.BCrypt.Verify(dto.Password, userLogin.PasswordHash)) {
+				return new LoginDtoOut() {
+					IsSuccessful = true,
+					Token = GenerateJWTToken(userLogin.Username)
+				};
+			}
+
+			return new LoginDtoOut() {
+				IsSuccessful = false,
+				ErrorMessage = "Invalid username or password"	// TODO: bilingual
+			};
+		}
+
+		private string GenerateJWTToken(string username) {
+			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("_P@ssW0rd!_0123456_P@ssW0rd!_0123456_P@ssW0rd!_0123456"));
+			var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+			var claims = new[] {
+				new Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Sub, username),
+				new Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+			};
+
+			var token = new System.IdentityModel.Tokens.Jwt.JwtSecurityToken(
+				issuer: "https://localhost:7225", 
+				audience: "https://localhost:7225", 
+				claims: claims,
+				expires: DateTime.Now.AddMinutes(15),
+				signingCredentials: creds);
+
+			return new JwtSecurityTokenHandler().WriteToken(token);
 		}
 	}
 }

@@ -22,7 +22,7 @@ namespace ReGoTech.ImmigrationSystem.API.Controllers
 				return BadRequest(ModelState);
 			}
 
-			if (!await _accountService.IsDtoValid(dto)) {
+			if (!await _accountService.IsClientDtoValid(dto)) {
 				return BadRequest(_accountService);
 			}
 
@@ -35,10 +35,23 @@ namespace ReGoTech.ImmigrationSystem.API.Controllers
 			return Created("", _accountService.ConvertToDto(model));
 		}
 
-		[HttpGet("Login")]
+		[HttpPost("Login")]
 		[AllowAnonymous]
-		public async Task<IActionResult> Login() {
-			throw new NotImplementedException();
+		public async Task<IActionResult> Login(LoginDtoIn dto) {
+			if (!ModelState.IsValid) {
+				return BadRequest(ModelState);
+			}
+
+			if (!await _accountService.IsLoginDtoValid(dto)) {
+				return BadRequest(_accountService.DtoValidationErrors);
+			}
+
+			var loginDtoOut = await _accountService.LoginClientAsync(dto);
+			if (loginDtoOut.IsSuccessful) {
+				return Ok(loginDtoOut);
+			}
+
+			return BadRequest(loginDtoOut);
 		}
 
 		[HttpGet("VerifyEmail")]
