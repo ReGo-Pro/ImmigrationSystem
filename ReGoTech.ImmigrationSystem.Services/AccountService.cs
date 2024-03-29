@@ -132,7 +132,7 @@ ReGoTech.net Team</pre>
 		}
 
 		private string GenerateJWTToken(string username) {
-			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("_P@ssW0rd!_0123456_P@ssW0rd!_0123456_P@ssW0rd!_0123456"));
+			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("ReGoTech.net-ReGoTech.net-ReGoTech.net-ReGoTech.net-ReGoTech.net"));
 			var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
 			var claims = new[] {
