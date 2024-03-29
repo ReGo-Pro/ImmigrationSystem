@@ -105,7 +105,7 @@ ReGoTech.net Team</pre>
 
 		public async Task<bool> VerifyClientEmail(string UID, string verificationCode) {
 			var client = await _uow.ClientRepository.SingleOrDefaultAsync(x => x.Uid == UID);
-			if (client.ClientLogin.EmailVerificationCode == verificationCode) {
+			if (client.ClientLogin.EmailVerificationCode == verificationCode && !IsVerificationCodeExpired(client.ClientLogin)) {
 				client.ClientLogin.IsEmailVerified = true;
 				await _uow.CompleteAsync();
 				return true;
@@ -148,6 +148,10 @@ ReGoTech.net Team</pre>
 				signingCredentials: creds);
 
 			return new JwtSecurityTokenHandler().WriteToken(token);
+		}
+
+		private bool IsVerificationCodeExpired(ClientLogin login) {
+			return DateTime.Now - login.LastVerificationSentTime > TimeSpan.FromMinutes(60);
 		}
 	}
 }
