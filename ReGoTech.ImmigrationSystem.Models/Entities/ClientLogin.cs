@@ -17,9 +17,11 @@ namespace ReGoTech.ImmigrationSystem.Models.Entities
 		public int VerificationSentFailCount { get; set; }
 		public int VerificationResendRequestCount { get; set; }
 		public DateTime LastVerificationSentTime { get; set; }
+        public string? RefreshToken { get; set; }
+        public DateTime? RefreshTokenExpires { get; set; }
 
 
-		public int ClientId { get; set; }
+        public int ClientId { get; set; }
         public virtual required Client Client { get; set; }
     }
 }

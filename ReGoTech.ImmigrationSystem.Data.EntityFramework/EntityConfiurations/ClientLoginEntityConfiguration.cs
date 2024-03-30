@@ -17,6 +17,7 @@ namespace ReGoTech.ImmigrationSystem.Data.EntityConfiurations
 			builder.Property(x => x.IsEmailVerified).IsRequired();
 			builder.Property(x => x.IsLockedOut).IsRequired();
 			builder.Property(x => x.EmailVerificationCode).IsRequired().HasMaxLength(32);
+			builder.Property(x => x.RefreshToken).HasMaxLength(64);
 		}
 	}
 }
