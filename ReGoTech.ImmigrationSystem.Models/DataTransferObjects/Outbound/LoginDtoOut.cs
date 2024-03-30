@@ -11,6 +11,7 @@ namespace ReGoTech.ImmigrationSystem.Models.DataTransferObjects.Outbound
 		public bool IsSuccessful { get; init; }
 		public string AccessToken { get; init; }
         public string RefreshToken { get; set; }
+        public DateTime? RefreshTokenExpires { get; set; }
         public string ErrorMessage { get; init; }
 	}
 }

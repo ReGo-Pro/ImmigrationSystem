@@ -120,12 +120,23 @@ ReGoTech.net Team</pre>
 			// userLogin shouldn't be null
 			if (userLogin != null && BCrypt.Net.BCrypt.Verify(dto.Password, userLogin.PasswordHash)) {
 				var accessToken = GenerateJWTToken(userLogin.Username);
-				var refreshToken = Guid.NewGuid().ToString("N") + Guid.NewGuid().ToString("N");		// A longer Guid
+				string refreshToken = null;
+				DateTime? expieryDate = null;
+
+				/* Note: it is generally not a good idea to keep user logged in for extended periods of time (one week in our case)
+				   for systems that deal with highly sensitive personal user data (such as an immigration system). The users must 
+				   login everytime then want to use the system. However, this part is implemented in this project just for practice. 
+				*/
+				if (dto.RememberMe.HasValue && dto.RememberMe.Value) {
+					refreshToken = Guid.NewGuid().ToString("N") + Guid.NewGuid().ToString("N");     // A longer Guid
+					expieryDate = DateTime.Now.AddDays(7);
+				}
 
 				return new LoginDtoOut() {
 					IsSuccessful = true,
 					AccessToken = accessToken,
-					RefreshToken = refreshToken
+					RefreshToken = refreshToken,
+					RefreshTokenExpires = expieryDate
 				};
 			}
 
