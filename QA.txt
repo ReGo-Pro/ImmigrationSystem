@@ -96,7 +96,7 @@ A.	Microsoft's JWT Bearer library provides some events in JwtBearerOptions that 
 Next:
 	-	Refresh token
 	-	Roles and claims
-	-	Forgot password functionality
+	-	Forgot password functionality (This definately needs a UI! Cannot just implement with API)
 	-	Clinet endpoint with Rest principles
 	-	Cleanup and architecture
 	-	Dockerize and move to postgres

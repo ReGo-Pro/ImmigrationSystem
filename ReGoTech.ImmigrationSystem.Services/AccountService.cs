@@ -152,7 +152,7 @@ ReGoTech.net Team</pre>
 
 		public async Task<LoginDtoOut> IssueRefreshTokenAsync(string oldToken) {
 			var userLogin = await _uow.ClientLoginRepository.FirstOrDefaultAsync(x => x.RefreshToken == oldToken);
-			if (userLogin == null) {
+			if (userLogin == null && !RefreshTokenExpierd(userLogin)) {
 				return new LoginDtoOut() {
 					IsSuccessful = false,
 					ErrorMessage = "Invalid token"
@@ -169,6 +169,10 @@ ReGoTech.net Team</pre>
 				RefreshToken = userLogin.RefreshToken,
 				RefreshTokenExpires = userLogin.RefreshTokenExpires
 			};
+		}
+
+		private bool RefreshTokenExpierd(ClientLogin userLogin) {
+			return DateTime.Now - userLogin.RefreshTokenExpires > TimeSpan.FromDays(7);
 		}
 
 		private string GenerateJWTToken(string username) {
