@@ -23,7 +23,6 @@ namespace ReGoTech.ImmigrationSystem.Services.ModelConvertion.Converters
 				Client = client,
 				Username = dto.Username,
 				PasswordHash = hasehdPassword,
-				PasswordSalt = passwordSalt,
 				Email = dto.Email,
 				IsEmailVerified = false,
 				IsLockedOut = false,
