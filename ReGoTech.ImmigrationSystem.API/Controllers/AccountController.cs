@@ -16,7 +16,7 @@ namespace ReGoTech.ImmigrationSystem.API.Controllers
 			_accountService = accountService;
 		}
 
-		[HttpPost("SignUp")]
+		[HttpPost("sign-up")]
 		[AllowAnonymous]
 		public async Task<IActionResult> SignUp(ClientDtoIn dto) {
 			if (!ModelState.IsValid) {
@@ -36,7 +36,7 @@ namespace ReGoTech.ImmigrationSystem.API.Controllers
 			return Created("", _accountService.ConvertToDto(model));
 		}
 
-		[HttpPost("Login")]
+		[HttpPost("login")]
 		[AllowAnonymous]
 		public async Task<IActionResult> Login(LoginDtoIn dto) {
 			if (!ModelState.IsValid) {
@@ -59,7 +59,7 @@ namespace ReGoTech.ImmigrationSystem.API.Controllers
 			return BadRequest(loginDtoOut);
 		}
 
-		[HttpGet("VerifyEmail")]
+		[HttpGet("verify-email")]
 		[AllowAnonymous]
 		public async Task<IActionResult> VerifyEmail([FromQuery]string Uid, string verificationCode) {
 			// TODO: Mark user email as verifieds
