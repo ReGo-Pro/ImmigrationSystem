@@ -9,6 +9,7 @@ using ReGoTech.ImmigrationSystem.Models.DataTransferObjects.Outbound;
 
 namespace ReGoTech.ImmigrationSystem.API.Controllers
 {
+	[AllowAnonymous]
 	public class AccountController : ApiController {
 		IAccountService _accountService;
 
@@ -17,7 +18,6 @@ namespace ReGoTech.ImmigrationSystem.API.Controllers
 		}
 
 		[HttpPost("sign-up")]
-		[AllowAnonymous]
 		public async Task<IActionResult> SignUp(ClientDtoIn dto) {
 			if (!ModelState.IsValid) {
 				return BadRequest(ModelState);
@@ -37,7 +37,6 @@ namespace ReGoTech.ImmigrationSystem.API.Controllers
 		}
 
 		[HttpPost("login")]
-		[AllowAnonymous]
 		public async Task<IActionResult> Login(LoginDtoIn dto) {
 			if (!ModelState.IsValid) {
 				return BadRequest(ModelState);
@@ -60,7 +59,6 @@ namespace ReGoTech.ImmigrationSystem.API.Controllers
 		}
 
 		[HttpGet("verify-email")]
-		[AllowAnonymous]
 		public async Task<IActionResult> VerifyEmail([FromQuery]string Uid, string verificationCode) {
 			// TODO: Mark user email as verifieds
 			if (await _accountService.VerifyClientEmail(Uid, verificationCode)) {
@@ -71,7 +69,6 @@ namespace ReGoTech.ImmigrationSystem.API.Controllers
 		}
 
 		[HttpPost("refresh-token")]
-		[AllowAnonymous]
 		public async Task<IActionResult> RefreshToken() {
 			var oldToken = Request.Cookies["refreshToken"];
 			var loginInfo = await _accountService.IssueRefreshTokenAsync(oldToken);
@@ -84,7 +81,6 @@ namespace ReGoTech.ImmigrationSystem.API.Controllers
 		}
 
 		[HttpGet("Secret")]
-		[AllowAnonymous]
 		public IActionResult GetSecret() {
 			return Ok("This is protected secret data");
 		}
