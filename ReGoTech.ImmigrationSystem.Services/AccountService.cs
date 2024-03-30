@@ -130,6 +130,9 @@ ReGoTech.net Team</pre>
 				if (dto.RememberMe.HasValue && dto.RememberMe.Value) {
 					refreshToken = Guid.NewGuid().ToString("N") + Guid.NewGuid().ToString("N");     // A longer Guid
 					expieryDate = DateTime.Now.AddDays(7);
+					userLogin.RefreshToken = refreshToken;
+					userLogin.RefreshTokenExpires = expieryDate;
+					await _uow.CompleteAsync();
 				}
 
 				return new LoginDtoOut() {
