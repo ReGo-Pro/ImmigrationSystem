@@ -88,3 +88,8 @@ A.	No, there is no need to store the salt separately as the BCrypt will prepend 
 	from hashed password when trying to verify it. So it is enough to only store hashed password that is the result of the following function:
 	BCrypt.Net.BCrypt.HashPassword(dto.Password, passwordSalt);
 ======================================================================================================================================================================
+Q.	How to customize authentication process using JWT? 
+A.	Microsoft's JWT Bearer library provides some events in JwtBearerOptions that gives you the opportunity to add your own logic to the authentication process. For 
+	example, the OnTokenValidated event allows you to do more custom validations on the token and even invalidate it if required. Or OnAuthenticationFailed allows you
+	to implement your own login when authentication fails, etc.
+======================================================================================================================================================================
