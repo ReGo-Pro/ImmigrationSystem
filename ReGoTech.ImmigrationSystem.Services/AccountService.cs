@@ -128,7 +128,7 @@ ReGoTech.net Team</pre>
 				   login everytime then want to use the system. However, this part is implemented in this project just for practice. 
 				*/
 				if (dto.RememberMe.HasValue && dto.RememberMe.Value) {
-					refreshToken = Guid.NewGuid().ToString("N") + Guid.NewGuid().ToString("N");     // A longer Guid
+					refreshToken = GetNewRefreshToken();
 					expieryDate = DateTime.Now.AddDays(7);
 					userLogin.RefreshToken = refreshToken;
 					userLogin.RefreshTokenExpires = expieryDate;
@@ -147,6 +147,27 @@ ReGoTech.net Team</pre>
 			return new LoginDtoOut() {
 				IsSuccessful = false,
 				ErrorMessage = "Invalid username or password"	// TODO: bilingual
+			};
+		}
+
+		public async Task<LoginDtoOut> IssueRefreshTokenAsync(string oldToken) {
+			var userLogin = await _uow.ClientLoginRepository.FirstOrDefaultAsync(x => x.RefreshToken == oldToken);
+			if (userLogin == null) {
+				return new LoginDtoOut() {
+					IsSuccessful = false,
+					ErrorMessage = "Invalid token"
+				};
+			}
+
+			userLogin.RefreshToken = GetNewRefreshToken();
+			userLogin.RefreshTokenExpires = DateTime.Now.AddDays(7);
+			await _uow.CompleteAsync();
+
+			return new LoginDtoOut() {
+				IsSuccessful = true,
+				AccessToken = GenerateJWTToken(userLogin.Username),
+				RefreshToken = userLogin.RefreshToken,
+				RefreshTokenExpires = userLogin.RefreshTokenExpires
 			};
 		}
 
@@ -171,6 +192,10 @@ ReGoTech.net Team</pre>
 
 		private bool IsVerificationCodeExpired(ClientLogin login) {
 			return DateTime.Now - login.LastVerificationSentTime > TimeSpan.FromMinutes(60);
+		}
+
+		private string GetNewRefreshToken() {
+			return Guid.NewGuid().ToString("N") + Guid.NewGuid().ToString("N");		// 64 Characters
 		}
 	}
 }

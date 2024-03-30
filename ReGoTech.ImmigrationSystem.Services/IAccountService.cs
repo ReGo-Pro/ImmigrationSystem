@@ -24,5 +24,6 @@ namespace ReGoTech.ImmigrationSystem.Services
 		Task<bool> VerifyClientEmail(string UID, string verificationCode);
 
 		Task<LoginDtoOut> LoginClientAsync(LoginDtoIn dto);
+		Task<LoginDtoOut> IssueRefreshTokenAsync(string oldToken);
 	}
 }

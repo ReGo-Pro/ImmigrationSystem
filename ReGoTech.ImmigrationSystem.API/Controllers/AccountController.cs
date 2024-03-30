@@ -70,7 +70,21 @@ namespace ReGoTech.ImmigrationSystem.API.Controllers
 			return BadRequest("Email verification failed. Please make sure the verification code is correct.");     // TODO: multilingual
 		}
 
+		[HttpPost("refresh-token")]
+		[AllowAnonymous]
+		public async Task<IActionResult> RefreshToken() {
+			var oldToken = Request.Cookies["refreshToken"];
+			var loginInfo = await _accountService.IssueRefreshTokenAsync(oldToken);
+			if (loginInfo.IsSuccessful) {
+				SetCookie(loginInfo);
+				return Ok(loginInfo);
+			}
+
+			return Unauthorized();
+		}
+
 		[HttpGet("Secret")]
+		[AllowAnonymous]
 		public IActionResult GetSecret() {
 			return Ok("This is protected secret data");
 		}
