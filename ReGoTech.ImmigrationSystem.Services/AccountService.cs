@@ -119,9 +119,13 @@ ReGoTech.net Team</pre>
 			var userLogin = await _uow.ClientLoginRepository.SingleOrDefaultAsync(x => x.Username == dto.Username);
 			// userLogin shouldn't be null
 			if (userLogin != null && BCrypt.Net.BCrypt.Verify(dto.Password, userLogin.PasswordHash)) {
+				var accessToken = GenerateJWTToken(userLogin.Username);
+				var refreshToken = Guid.NewGuid().ToString("N") + Guid.NewGuid().ToString("N");		// A longer Guid
+
 				return new LoginDtoOut() {
 					IsSuccessful = true,
-					Token = GenerateJWTToken(userLogin.Username)
+					AccessToken = accessToken,
+					RefreshToken = refreshToken
 				};
 			}
 
