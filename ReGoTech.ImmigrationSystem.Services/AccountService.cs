@@ -132,9 +132,10 @@ ReGoTech.net Team</pre>
 					expieryDate = DateTime.Now.AddDays(7);
 					userLogin.RefreshToken = refreshToken;
 					userLogin.RefreshTokenExpires = expieryDate;
-					await _uow.CompleteAsync();
 				}
 
+				userLogin.LastLoginDate = DateTime.Now;
+				await _uow.CompleteAsync();
 				return new LoginDtoOut() {
 					IsSuccessful = true,
 					AccessToken = accessToken,
