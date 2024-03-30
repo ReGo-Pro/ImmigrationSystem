@@ -5,6 +5,7 @@ using ReGoTech.ImmigrationSystem.Services.DtoValidation;
 using ReGoTech.ImmigrationSystem.Data;
 using ReGoTech.ImmigrationSystem.Services.ModelConvertion.Contracts;
 using ReGoTech.ImmigrationSystem.Services;
+using ReGoTech.ImmigrationSystem.Models.DataTransferObjects.Outbound;
 
 namespace ReGoTech.ImmigrationSystem.API.Controllers
 {
@@ -47,6 +48,10 @@ namespace ReGoTech.ImmigrationSystem.API.Controllers
 			}
 
 			var loginDtoOut = await _accountService.LoginClientAsync(dto);
+			if (!string.IsNullOrEmpty(loginDtoOut.RefreshToken)) {
+				SetCookie(loginDtoOut);
+			}
+
 			if (loginDtoOut.IsSuccessful) {
 				return Ok(loginDtoOut);
 			}
@@ -68,6 +73,15 @@ namespace ReGoTech.ImmigrationSystem.API.Controllers
 		[HttpGet("Secret")]
 		public IActionResult GetSecret() {
 			return Ok("This is protected secret data");
+		}
+
+		private void SetCookie(LoginDtoOut dto) {
+			CookieOptions options = new CookieOptions() {
+				HttpOnly = true,
+				Expires = dto.RefreshTokenExpires
+			};
+
+			Response.Cookies.Append("refreshToken", dto.RefreshToken, options);
 		}
 
 		// Remove client (should be authenticated - just for same client - and admin)
