@@ -34,9 +34,21 @@ builder.Services.AddAuthentication(o => {
 		IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("ReGoTech.net-ReGoTech.net-ReGoTech.net-ReGoTech.net-ReGoTech.net")),
 		ValidateIssuer = true,
 		ValidateAudience = true,
-		ValidateLifetime = true
+		ValidateLifetime = true,
+	};
+	o.Events = new JwtBearerEvents() {
+		OnTokenValidated = context => {
+			// Check if token is blacklisted
+			if (IsTokenBlacklisted(context.SecurityToken)) {
+				// Token is blacklisted, reject the request
+				context.Fail("Token is blacklisted.");
+			}
+
+			return Task.CompletedTask;
+		}
 	};
 });
+
 builder.Services.AddAuthorization();
 
 builder.Services.AddEndpointsApiExplorer();
@@ -70,10 +82,13 @@ if (app.Environment.IsDevelopment()) {
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
+
+bool IsTokenBlacklisted(SecurityToken securityToken) {
+	// This methods allows us to reject authenticating previously issued JWT tokens that are not expired yet (after issuing a new one)
+	// TODO: Maybe implement this functionality
+	return false;
+}
