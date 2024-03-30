@@ -93,12 +93,6 @@ A.	Microsoft's JWT Bearer library provides some events in JwtBearerOptions that 
 	example, the OnTokenValidated event allows you to do more custom validations on the token and even invalidate it if required. Or OnAuthenticationFailed allows you
 	to implement your own login when authentication fails, etc.
 ======================================================================================================================================================================
-Next:
-	-	Refresh token
-	-	Roles and claims
-	-	Forgot password functionality (This definately needs a UI! Cannot just implement with API)
-	-	Clinet endpoint with Rest principles
-	-	Cleanup and architecture
-	-	Dockerize and move to postgres
-	-	File upload endpoint and file management
-	-	Specification pattern
+Q.	Where can I find a list of JWT registered and public claims? 
+A.	https://www.iana.org/assignments/jwt/jwt.xhtml
+======================================================================================================================================================================
