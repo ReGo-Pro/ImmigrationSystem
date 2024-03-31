@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ReGoTech.ImmigrationSystem.Data.EntityConfiurations;
+using ReGoTech.ImmigrationSystem.Data.EntityFramework.EntityConfiurations;
 using ReGoTech.ImmigrationSystem.Models.Entities;
 
 namespace ReGoTech.ImmigrationSystem.Data
@@ -13,9 +14,11 @@ namespace ReGoTech.ImmigrationSystem.Data
 		protected override void OnModelCreating(ModelBuilder modelBuilder) {
 			modelBuilder.ApplyConfiguration(new ClientEntityConfigurations());
 			modelBuilder.ApplyConfiguration(new ClientLoginEntityConfiguration());
+			modelBuilder.ApplyConfiguration(new RoleEntityConfigurations());
 		}
 
 		public DbSet<Client> Clients { get; set; }
 		public DbSet<ClientLogin> ClientLogins { get; set; }
+		public DbSet<Role> Roles { get; set; }
 	}
 }
