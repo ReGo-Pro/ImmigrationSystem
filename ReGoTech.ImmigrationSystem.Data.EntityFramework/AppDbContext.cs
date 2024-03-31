@@ -15,10 +15,12 @@ namespace ReGoTech.ImmigrationSystem.Data
 			modelBuilder.ApplyConfiguration(new ClientEntityConfigurations());
 			modelBuilder.ApplyConfiguration(new ClientLoginEntityConfiguration());
 			modelBuilder.ApplyConfiguration(new RoleEntityConfigurations());
+			modelBuilder.ApplyConfiguration(new PermissionEntityConfigurations());
 		}
 
 		public DbSet<Client> Clients { get; set; }
 		public DbSet<ClientLogin> ClientLogins { get; set; }
 		public DbSet<Role> Roles { get; set; }
+		public DbSet<Permission> Permissions { get; set; }
 	}
 }
