@@ -8,5 +8,8 @@ namespace ReGoTech.ImmigrationSystem.Models.Entities
         public ClientType Type { get; set; }
 
         public virtual ClientLogin? ClientLogin { get; set; }
+
+        public int RoleId { get; set; }
+        public Role Role { get; set; }
     }
 }

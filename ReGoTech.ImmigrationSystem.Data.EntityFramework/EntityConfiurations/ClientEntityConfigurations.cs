@@ -14,6 +14,11 @@ namespace ReGoTech.ImmigrationSystem.Data.EntityConfiurations
 			builder.Property(x => x.FirstName).HasMaxLength(128);
 			builder.Property(x => x.LastName).HasMaxLength(128);
 			builder.Property(x => x.Uid).HasMaxLength(10);
+			builder.Property(x => x.RoleId).HasDefaultValue(5);     // Least privileged role
+
+			builder.HasOne(x => x.Role)
+				.WithMany(x => x.Clients)
+				.OnDelete(DeleteBehavior.NoAction);
 		}
 	}
 }
