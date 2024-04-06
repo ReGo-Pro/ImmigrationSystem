@@ -9,7 +9,6 @@ namespace ReGoTech.ImmigrationSystem.Models.Entities
 	public class Permission : EntityBase
 	{
         public required string Name { get; set; }
-        public required string Mask { get; set; }
         public required string Description { get; set; }
     }
 }

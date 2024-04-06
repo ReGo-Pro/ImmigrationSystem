@@ -16,7 +16,6 @@ namespace ReGoTech.ImmigrationSystem.Data.EntityFramework.EntityConfiurations
 
 			builder.Property(x => x.Id).HasColumnName(nameof(Permission) + "Id");
 			builder.Property(x => x.Name).IsRequired().HasMaxLength(32);
-			builder.Property(x => x.Mask).IsRequired().HasMaxLength(8);
 			builder.Property(x => x.Description).IsRequired().HasMaxLength(256);
 		}
 	}
