@@ -26,7 +26,8 @@ SET IDENTITY_INSERT Roles OFF;
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-
-        }
+            var rolesDelete = "DELETE FROM Roles WHERE RoleId IN (1, 2, 3, 4, 5);";
+            migrationBuilder.Sql(rolesDelete);
+		}
     }
 }
