@@ -96,12 +96,16 @@ A.	Microsoft's JWT Bearer library provides some events in JwtBearerOptions that 
 Q.	Where can I find a list of JWT registered and public claims? 
 A.	https://www.iana.org/assignments/jwt/jwt.xhtml
 ======================================================================================================================================================================
-Next:
-	-	Roles and claims
-	-	External auth (gmail)
-	-	Forgot password functionality (This definately needs a UI! Cannot just implement with API)
-	-	Clinet endpoint with Rest principles
-	-	Cleanup and architecture
-	-	Dockerize and move to postgres
-	-	File upload endpoint and file management
-	-	Specification pattern
+Q.	What is Explicit vs implicit many to many relationships in EF Core? And which one to use?
+A.	Explicit means explicitly having the junction table as an entity in the appliction. However in implicit relationship we allow EF Core handle this table and there
+	is no entity to represent it. 
+	Here are the advantages of explicit approach:
+	-	More control: this approach gives us more control over the junction table including adding more columns and properties to it.
+	-	Clarity
+	-	Flexibility
+	Here are the advantages of implicit approach:
+	-	Ease of use: If your many-to-many relationship is straightforward and does not require additional properties or behavior on the junction table.
+	-	Simplicity
+	-	Convenience
+	* Usually in complex applications we need more properties on the junction table than just simple id columns, so the first approach is used more often.
+======================================================================================================================================================================
