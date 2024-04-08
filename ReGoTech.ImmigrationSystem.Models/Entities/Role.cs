@@ -10,7 +10,7 @@ namespace ReGoTech.ImmigrationSystem.Models.Entities
 	{
         public required string Name { get; set; }
         public required string Description { get; set; }
-        public List<RolePermission> RolePermissions { get; set; }
-        public List<Client> Clients { get; set; }
+        public virtual List<RolePermission> RolePermissions { get; set; }
+        public virtual List<Client> Clients { get; set; }
     }
 }
