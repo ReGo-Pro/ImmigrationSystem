@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 
 namespace ReGoTech.ImmigrationSystem.Data.EntityFramework.Repositories
 {
+	// TODO: Check which of the following methods should be AsNoTracking
 	public class Repository<TEntity> : IRepository<TEntity> where TEntity : EntityBase
 	{
 		private DbContext _dbContext;
