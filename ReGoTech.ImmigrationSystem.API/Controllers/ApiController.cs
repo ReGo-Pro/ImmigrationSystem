@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ReGoTech.ImmigrationSystem.API.Controllers
 {
-	[Route("api/v1/[controller]")]
+	[Route("api/v1/[controller]" + "s")]
 	[ApiController]
 	[Authorize]
 
