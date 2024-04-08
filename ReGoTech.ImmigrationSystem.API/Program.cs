@@ -60,6 +60,7 @@ builder.Services.AddScoped<IDtoValidator<ClientDtoIn>, ClientDtoValidator>();
 builder.Services.AddScoped<IDtoValidator<LoginDtoIn>, LoginDtoValidator>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ISignupModelConverter, SignUpModelConverter>();
+builder.Services.AddScoped<IClientService, ClientService>();
 
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<ISignupModelConverter, SignUpModelConverter>();
