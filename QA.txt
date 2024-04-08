@@ -109,3 +109,36 @@ A.	Explicit means explicitly having the junction table as an entity in the appli
 	-	Convenience
 	* Usually in complex applications we need more properties on the junction table than just simple id columns, so the first approach is used more often.
 ======================================================================================================================================================================
+Q.	Which HTTP methods are used in RESTful APIs and for what?
+A.	-	[GET]		To get (read) a resource
+	-	[POST]		To create a new resource
+	-	[PUT]		To fully update a resource (replace)
+	-	[PATCH]		To partially update a resource (certain properties)
+	-	[DELETE]	To remove a resource
+======================================================================================================================================================================
+Q.	How should the URL scheme be in RESTful APIs?
+A.	-	[GET]		.../Products		Get all products
+	-	[POST]		.../Products		Create a product using the given JSON body
+	-	[GET]		.../Products/1		Get product with ID = 1
+	-	[PUT]		.../Products/1		Update all properties on products with ID = 1 using the given JSON body
+	-	[PATCH]		.../Products/1		Update some properties of products with ID = 1 using the given JSON body
+	-	[DELETE]	.../Products/1		Delete the product with ID = 1
+======================================================================================================================================================================
+Q.	What's the difference between [POST] and [PUT]?
+A.	[POST] is for creating a new resource. The endpoint with [POST] method should not udpate a resource
+	[PUT] is for performing a full update on a resource. Ideally and endpoint with [PUT] method should not create a new resource if the given one is not found. This
+	make endpiont intention clear. The client might not expect to create a new resource when calling a [PUT] endpoint. If a resource is not found, the [PUT] endpoint
+	should simple return 404 error.
+======================================================================================================================================================================
+Q.	What does it mean for [PUT] method to be idempotent?
+A.	It means that calling a [PUT] endpoint multiple times should not change the result beyound the initial application.In other words it should be safe to call [PUT]
+	endpoint multiple times with the same parameters without any impact on the application on subsequent calls.
+======================================================================================================================================================================
+Q.	Should [PUT] endpoints partially update a resource?
+A.	No - according to REST principles, [PUT] should only do a full upadte on a resource (replace). For partial updates [PATCH] method should be used.
+======================================================================================================================================================================
+Q.	What are some other alteratives to RESTful APIs?
+A.	There are a few other alternatives among whicch the most famous ones are as listed:
+	-	GraphQL
+	-	gRPC
+======================================================================================================================================================================
